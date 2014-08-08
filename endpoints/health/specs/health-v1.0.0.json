@@ -1,0 +1,6 @@
+{
+    "description": "/health version 1.0.0",
+    "response": {
+        "type": "string"
+    }
+}

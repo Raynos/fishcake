@@ -1,0 +1,21 @@
+{
+    "project_id": "rt/my-test",
+    "conduit_uri": "https://code.uberinternal.com/",
+    "git.default-relative-commit": "origin/master",
+
+    "history.immutable": true,
+    "jenkins.uri": "https://ci.uber.com/",
+    "jenkins.job": "test-my-test",
+    "jenkins.token": "f7db22b3-8228-488a-963b-14ceba0363fe",
+
+    "lint.engine": "JSHintLintEngine",
+    "lint.engine.single.linter": "ArcanistJSHintLinter",
+    "unit.engine": "TAPTestEngine",
+    "unit.engine.tap.command": "npm run fast-test --color=always",
+    "unit.engine.tap.cover": "npm run cover --color=always",
+
+    "load": [".arcanist/jenkinsphoo", ".arcanist/tap", ".arcanist/jshintlinter"],
+    "events.listeners": ["JenkinsDiffEventListener"],
+
+    "phabProjectId": "nope"
+}

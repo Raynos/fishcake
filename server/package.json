@@ -1,0 +1,53 @@
+{
+  "name": "my-test",
+  "version": "1.0.0",
+  "description": "a test",
+  "keywords": [],
+  "author": "Raynos <raynos2@gmail.com>",
+  "repository": "git+ssh://gitolite@code.uber.internal:rt/my-test.git",
+  "main": "server.js",
+  "homepage": "https://code.uberinternal.com/diffusion/RTMYT/",
+  "bugs": {
+    "url": "https://code.uberinternal.com/maniphest/task/create/",
+    "email": "raynos2@gmail.com"
+  },
+  "dependencies": {
+    "routes-router": "^3.2.0",
+    "run-with": "git+ssh://gitolite@code.uber.internal:rt/run-with.git#v1.0.0",
+    "playdoh-server": "git+ssh://gitolite@code.uber.internal:github/uber/playdoh-server#v2.3.1",
+    "rtapi-router": "git+ssh://gitolite@code.uber.internal:rt/rtapi-router"
+  },
+  "devDependencies": {
+    "tape": "^2.12.3",
+    "request": "^2.34.0",
+    "jshint": "^2.5.0",
+    "istanbul": "^0.2.7",
+    "tap-spec": "^0.1.8",
+    "nodemon": "^1.0.17",
+    "opn": "^0.1.2",
+    "graphite-dash-gen": "git+ssh://gitolite@code.uber.internal:dispatch/graphite-dash-gen#v1.2.0",
+    "playdoh": "git+ssh://gitolite@code.uber.internal:github/uber/playdoh#v2.5.0"
+  },
+  "licenses": [],
+  "scripts": {
+    "test": "npm run jshint -s && tape ../endpoints/**/fast.js | tap-spec",
+    "watch": "NODE_HEAPDUMP_OPTIONS=nosignal nodemon --ignore browser/ --exec 'node' server.js",
+    "fast-test": "node test/index.js | tap-spec",
+    "jshint": "jshint --verbose $(git ls-files | grep '\\.js$')",
+    "cover": "istanbul cover --report cobertura --print detail test/index.js",
+    "view-cover": "istanbul report html && opn ./coverage/index.html",
+    "shrinkwrap": "playdoh shrinkwrap",
+    "changelog-patch": "playdoh changelog --patch",
+    "changelog-minor": "playdoh changelog --minor",
+    "changelog-major": "playdoh changelog --major",
+    "jenkins-install": "npm --registry=http://archive.uber.com/npm install",
+    "jenkins-jshint": "jshint --verbose --reporter jslint $(git ls-files | grep '\\.js$' | sed -e \"s~^~${WORKSPACE:-.}/~\") > jshint.xml",
+    "jenkins-test": "npm run jshint -s && istanbul cover --report cobertura --print none test/index.js | tee test/test.js.tap"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.4.3"
+  },
+  "private": true,
+  "playdoh-version": "module@2.5.0"
+}

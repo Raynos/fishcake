@@ -1,0 +1,12 @@
+{
+    "port": 9001,
+    "controlPort": 9002,
+    "team": "rt",
+    "project": "my-test",
+    "playdoh-uncaught": {
+        "backupFile": "my-test-uncaught-exception.log"
+    },
+    "playdoh-logger": {
+        "console": true
+    }
+}

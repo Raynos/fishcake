@@ -1,0 +1,20 @@
+{
+    "playdoh-logger": {
+        "kafka": {
+            "host": "localhost",
+            "port": 2182
+        },
+        "sentry": {
+            "id": "%sentryId%"
+        },
+        "logFolder": "/var/log/uber",
+        "console": false
+    },
+    "playdoh-statsd": {
+        "host": "stats.local.uber.internal",
+        "port": 8127
+    },
+    "playdoh-uncaught": {
+        "backupFile": "/var/log/uber/my-test-uncaught-exception.log"
+    }
+}

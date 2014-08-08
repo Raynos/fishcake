@@ -1,0 +1,4 @@
+{
+    "startup_time_wait": 5,
+    "health": ["/etc/nagios/checks/my-test"]
+}
