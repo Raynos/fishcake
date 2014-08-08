@@ -11,7 +11,8 @@
   "dependencies": {
     "error": "^4.1.1",
     "routes-router": "^4.1.0",
-    "rtapi-router": "git+ssh://gitolite@code.uber.internal:rt/rtapi-router"
+    "rtapi-router": "git+ssh://gitolite@code.uber.internal:rt/rtapi-router",
+    "tape": "git://github.com/Raynos/tape#global-hack"
   },
   "devDependencies": {
     "body": "^4.5.0",
@@ -19,6 +20,6 @@
     "request": "^2.40.0",
     "rt-on-client": "git+ssh://gitolite@code.uber.internal:rt/on-client",
     "send-data": "^3.3.1",
-    "tape": "git://github.com/Raynos/tape#global-hack"
+    "tape": "^2.14.0"
   }
 }

@@ -1,8 +1,8 @@
 var mountEndpoint = require('./lib/mount-endpoint');
 
 var specs = {
-    queries: {},
-    commands: {
+    rpc: {
+        // POST /
         'index': {
             handler: require('./auth.js'),
             schema: {

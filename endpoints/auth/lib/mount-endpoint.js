@@ -32,10 +32,10 @@ module.exports = mountEndpoint;
 
 function toDescriptive(specs) {
     var descriptiveSpec = {};
-    var queries = specs.queries || {};
-    var commands = specs.commands || {};
+    var read = specs.read || {};
+    var rpc = specs.rpc || {};
 
-    Object.keys(queries).forEach(function toGet(queryKey) {
+    Object.keys(read).forEach(function toGet(queryKey) {
         var url = '/' + queryKey;
 
         if (queryKey === 'index') {
@@ -47,12 +47,12 @@ function toDescriptive(specs) {
         }
 
         descriptiveSpec[url].GET = {
-            handler: queries[queryKey].handler,
-            schema: queries[queryKey].schema
+            handler: read[queryKey].handler,
+            schema: read[queryKey].schema
         };
     });
 
-    Object.keys(commands).forEach(function toPost(commandKey) {
+    Object.keys(rpc).forEach(function toPost(commandKey) {
         var url = '/' + commandKey;
 
         if (commandKey === 'index') {
@@ -64,8 +64,8 @@ function toDescriptive(specs) {
         }
 
         descriptiveSpec[url].POST = {
-            handler: commands[commandKey].handler,
-            schema: commands[commandKey].schema
+            handler: rpc[commandKey].handler,
+            schema: rpc[commandKey].schema
         };
     });
 
