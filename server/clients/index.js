@@ -2,6 +2,8 @@ var createLogger = require('../lib/playdoh-clients/logger.js');
 var createStatsd = require('../lib/playdoh-clients/statsd.js');
 var createUncaught = require('../lib/playdoh-clients/uncaught.js');
 // var createApi = require('./api-client.js');
+// var createLevel = require('./level.js');
+// var createDeviceRepo = require('./device-repository');
 
 module.exports = createClients;
 
@@ -10,9 +12,10 @@ function createClients(config) {
 
     clients.statsd = createStatsd(config, clients);
     clients.logger = createLogger(config, clients);
-    console.log('logger', clients.logger);
     clients.onError = createUncaught(config, clients);
     // clients.api = createApi(config.get('api'), clients);
+    // clients.level = createLevel(config.get('level'), clients);
+    // clients.deviceRepo = createDeviceRepo(clients);
 
     return clients;
 }
