@@ -8,20 +8,21 @@ var createRouter = require('./router.js');
 var createClients = require('./clients/');
 
 function main() {
-    var config = fetchConfig(__dirname, {
+    var service = {};
+    var config = service.config = fetchConfig(__dirname, {
         dc: process.env.NODE_ENV === 'production' ?
             '/etc/uber/datacenter' : null
     });
-    var clients = createClients(config);
-    process.on('uncaughtException', clients.onError);
+    var clients = service.clients = createClients(config);
 
-    // write up the server with configuration settings at the
-    // top level.
     var router = createRouter(config, clients);
-    createServer(router, {
+    service.router = router;
+    service.server = createServer(router, {
         config: config,
         clients: clients
     });
+
+    return service;
 }
 
 module.exports = main;
@@ -31,5 +32,10 @@ if (require.main === module) {
     // have a useful name for your process when monitoring it.
     process.title = 'nodejs-rt-myTest-on-' + hostname();
 
-    main();
+    var service = main();
+    service.server.listen(service.config.get('port'));
+    service.server.perfServer
+        .listen(service.config.get('controlPort'));
+
+    process.on('uncaughtException', service.clients.onError);
 }

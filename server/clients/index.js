@@ -10,6 +10,7 @@ function createClients(config) {
 
     clients.statsd = createStatsd(config, clients);
     clients.logger = createLogger(config, clients);
+    console.log('logger', clients.logger);
     clients.onError = createUncaught(config, clients);
     // clients.api = createApi(config.get('api'), clients);
 

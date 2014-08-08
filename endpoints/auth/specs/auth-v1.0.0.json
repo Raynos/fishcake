@@ -1,0 +1,52 @@
+{
+    "description": "/auth version 1.0.0",
+    "request": {
+        "type": "object",
+        "required": ["id", "password", "app"],
+        "properties": {
+            "id": {
+                "type": "string",
+                "description": "email, nickname, username or id",
+                "pattern": "^\\S*$",
+                "minLength": 1
+            },
+            "password": {
+                "type": "string",
+                "description": "the plain text password",
+                "minLength": 1
+            },
+            "app": {
+                "type": "string",
+                "enum": [ "client", "driver" ]
+            }
+        }
+    },
+    "response": {
+        "type": "object",
+        "properties": {
+            "token": {
+                "type": "string"
+            }
+        },
+        "required": ["token"]
+    },
+    "error": {
+        "type": "object",
+        "properties": {
+            "statusCode": {
+                "type": "number",
+                "enum": [400]
+            },
+            "message": {
+                "type": "string"
+            },
+            "type": {
+                "type": "string",
+                "enum": [
+                    "auth.common.incorrectPassword"
+                ]
+            }
+        },
+        "required": ["statusCode", "message"]
+    }
+}

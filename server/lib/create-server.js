@@ -14,18 +14,17 @@ function createServer(handler, opts) {
 
     //TODO replace me with decent logger
     server.on('request', function onRequest(req) {
-        config.logger.info('got request', {
+        clients.logger.info('got request', {
             uri: req.url
         });
     });
 
     server.perfServer = perf(config.get('perfSettings'));
 
-    server.listen(config.get('port'));
-    server.perfServer.listen(config.get('controlPort'));
-
-    clients.logger.info('listening on port', {
-        port: config.get('port')
+    server.on('listening', function onListen() {
+        clients.logger.info('listening on port', {
+            port: config.get('port')
+        });
     });
 
     var errOpts = {
@@ -44,8 +43,7 @@ function createServer(handler, opts) {
             clients: clients
         }, defaultErrorHandler);
 
-        /*  
-
+        /*
             type TypedError : {
                 message: String,
                 statusCode?: Number,
@@ -55,7 +53,7 @@ function createServer(handler, opts) {
                 messages?: Array<String>
             }
 
-            defaultErrorHandler : (err?: TypedError)
+            defaultErrorHandler : (err?: TypedError) => void
         */
         function defaultErrorHandler(err) {
             var parsedUrl = url.parse(req.url);
@@ -63,15 +61,19 @@ function createServer(handler, opts) {
                 parsedUrl.pathname;
 
             if (err) {
-                if (typeof err.expected === 'string') {
-                    clients.statsd.increment(statsdKey + '.expected');
+                if (err.expected) {
+                    if (clients.statsd) {
+                        clients.statsd.increment(statsdKey + '.expected');
+                    }
                     sendExpectedError(req, res, err, errOpts);
                 } else {
                     clients.logger.error('unexpected error', err);
-                    clients.statsd.increment(statsdKey + '.unexpected');
+                    if (clients.statsd) {
+                        clients.statsd.increment(statsdKey + '.unexpected');
+                    }
                     sendUnexpectedError(req, res, err, errOpts);
                 }
-            } else {
+            } else if (clients.statsd) {
                 clients.statsd.increment(statsdKey + '.ok');
             }
         }

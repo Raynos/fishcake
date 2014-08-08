@@ -12,10 +12,12 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
-    "routes-router": "^3.2.0",
-    "run-with": "git+ssh://gitolite@code.uber.internal:rt/run-with.git#v1.0.0",
     "playdoh-server": "git+ssh://gitolite@code.uber.internal:github/uber/playdoh-server#v2.3.1",
-    "rtapi-router": "git+ssh://gitolite@code.uber.internal:rt/rtapi-router"
+    "process": "^0.7.0",
+    "routes-router": "^4.1.0",
+    "rtapi-router": "git+ssh://gitolite@code.uber.internal:rt/rtapi-router",
+    "run-with": "git+ssh://gitolite@code.uber.internal:rt/run-with.git#v1.0.0",
+    "send-data": "^3.3.1"
   },
   "devDependencies": {
     "tape": "^2.12.3",
@@ -30,12 +32,13 @@
   },
   "licenses": [],
   "scripts": {
-    "test": "npm run jshint -s && tape ../endpoints/*/test/fast.js | tap-spec",
+    "test": "npm run jshint -s && tape ../endpoints/*/test/index.js | tap-spec",
     "watch": "NODE_HEAPDUMP_OPTIONS=nosignal nodemon --ignore browser/ --exec 'node' server.js",
-    "fast-test": "node test/index.js | tap-spec",
+    "fast-test": "tape ../endpoints/*/test/fast.js | tap-spec",
     "jshint": "jshint --verbose .",
     "jshint-pre-commit": "jshint --verbose $(git diff --cached --name-only --diff-filter=ACMRTUXB | grep '\\.js$')",
-    "cover": "istanbul cover --report cobertura --print detail test/index.js",
+    "cover": "istanbul cover --root .. node_modules/.bin/tape -- ../endpoints/*/test/index.js",
+    "fast-cover": "istanbul cover --root .. node_modules/.bin/tape -- ../endpoints/*/test/fast.js",
     "view-cover": "istanbul report html && opn ./coverage/index.html",
     "shrinkwrap": "playdoh shrinkwrap",
     "changelog-patch": "playdoh changelog --patch",

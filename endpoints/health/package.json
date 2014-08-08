@@ -13,7 +13,8 @@
   "license": "ISC",
   "devDependencies": {
     "hammock": "^0.1.9",
-    "tape": "^2.14.0"
+    "request": "^2.40.0",
+    "tape": "git://github.com/Raynos/tape#global-hack"
   },
   "dependencies": {
     "routes-router": "^4.1.0",

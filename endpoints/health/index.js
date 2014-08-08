@@ -3,7 +3,7 @@ var mountEndpoint = require('./lib/mount-endpoint');
 var specs = {
     // queries compile to GET
     queries: {
-        'health': {
+        'index': {
             handler: require('./health.js'),
             schema: {
                 '1.0.0': require('./specs/health-v1.0.0.json')

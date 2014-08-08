@@ -14,18 +14,17 @@ test('endpoint writes to response', function t(assert) {
     var called = false;
 
     endpoint(
-        MockRequest({ url: '/health', method: 'GET' }),
-        MockResponse(function (err, resp) {
+        MockRequest({ url: '/', method: 'GET' }),
+        MockResponse(function onResponse(err, resp) {
             assert.ifError(err);
 
             assert.equal(called, true);
-
             assert.equal(resp.body, '"OK"');
 
             assert.end();
         }),
         {},
-        function (err) {
+        function onEndpoint(err) {
             called = true;
             assert.ifError(err);
         });
