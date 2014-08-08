@@ -1,0 +1,22 @@
+{
+  "name": "health",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "hammock": "^0.1.9",
+    "tape": "^2.14.0"
+  },
+  "dependencies": {
+    "routes-router": "^4.1.0",
+    "rtapi-router": "git+ssh://gitolite@code.uber.internal:rt/rtapi-router"
+  }
+}

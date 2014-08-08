@@ -30,10 +30,11 @@
   },
   "licenses": [],
   "scripts": {
-    "test": "npm run jshint -s && tape ../endpoints/**/fast.js | tap-spec",
+    "test": "npm run jshint -s && tape ../endpoints/*/test/fast.js | tap-spec",
     "watch": "NODE_HEAPDUMP_OPTIONS=nosignal nodemon --ignore browser/ --exec 'node' server.js",
     "fast-test": "node test/index.js | tap-spec",
-    "jshint": "jshint --verbose $(git ls-files | grep '\\.js$')",
+    "jshint": "jshint --verbose .",
+    "jshint-pre-commit": "jshint --verbose $(git diff --cached --name-only --diff-filter=ACMRTUXB | grep '\\.js$')",
     "cover": "istanbul cover --report cobertura --print detail test/index.js",
     "view-cover": "istanbul report html && opn ./coverage/index.html",
     "shrinkwrap": "playdoh shrinkwrap",

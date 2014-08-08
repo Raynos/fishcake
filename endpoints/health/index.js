@@ -1,4 +1,4 @@
-var mountEndpoint = require('../../server/lib/mount-endpoint');
+var mountEndpoint = require('./lib/mount-endpoint');
 
 var specs = {
     // queries compile to GET

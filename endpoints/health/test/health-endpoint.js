@@ -9,3 +9,24 @@ test('endpoint is a function', function t(assert) {
 
     assert.end();
 });
+
+test('endpoint writes to response', function t(assert) {
+    var called = false;
+
+    endpoint(
+        MockRequest({ url: '/health', method: 'GET' }),
+        MockResponse(function (err, resp) {
+            assert.ifError(err);
+
+            assert.equal(called, true);
+
+            assert.equal(resp.body, '"OK"');
+
+            assert.end();
+        }),
+        {},
+        function (err) {
+            called = true;
+            assert.ifError(err);
+        });
+});
