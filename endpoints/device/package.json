@@ -1,0 +1,25 @@
+{
+  "name": "device",
+  "version": "1.0.0",
+  "description": "This shows an example of writing a set of thin business logic     on top of a database",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "level-mem": "^0.18.0",
+    "level-sublevel": "^6.2.2",
+    "tape": "git://github.com/Raynos/tape#global-hack"
+  },
+  "dependencies": {
+    "error": "^4.1.1",
+    "evented-repository": "git://github.com/Raynos/evented-repository#level-as-arg",
+    "routes-router": "^4.1.0",
+    "rtapi-router": "git+ssh://gitolite@code.uber.internal:rt/rtapi-router"
+  }
+}

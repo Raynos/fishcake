@@ -8,5 +8,9 @@
     },
     "playdoh-logger": {
         "console": true
+    },
+
+    "level": {
+        "dbPath": "/tmp/playdoh-scaffold-test"
     }
 }

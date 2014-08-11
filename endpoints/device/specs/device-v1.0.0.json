@@ -1,0 +1,12 @@
+{
+    "id": "uber-schema://demo/1.0.0/device",
+    "type": "object",
+    "properties": {
+        "id": { "type": "number" },
+        "deviceToken": { "type": "string" },
+        "userId": { "type": "number" },
+        "type": { "type": "string" },
+        "name": { "type": "string" }
+    },
+    "required": ["id", "deviceToken", "userId", "type", "name"]
+}

@@ -11,6 +11,9 @@ function createRouter() {
     // This is the auth endpoint, mounted for demo purposes
     router.prefix('/auth', require('../endpoints/auth/'));
 
+    // This is the device endpoint, mounted for demo purposes
+    router.prefix('/device', require('../endpoints/device/'));
+
     console.log('router', router.routeMap);
 
     return router;

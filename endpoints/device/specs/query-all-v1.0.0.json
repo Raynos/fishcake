@@ -1,0 +1,33 @@
+{
+    "description": "/devices version 1.0.0",
+    "request": {
+        "type": "object",
+        "properties": {
+            "userId": {
+                "type": "number"
+            }
+        }
+    },
+    "response": {
+        "$ref": "uber-schema://demo/1.0.0/device"
+    },
+    "error": {
+        "type": "object",
+        "properties": {
+            "statusCode": {
+                "type": "number",
+                "enum": [400]
+            },
+            "message": {
+                "type": "string"
+            },
+            "type": {
+                "type": "string",
+                "enum": [
+                    "auth.common.incorrectPassword"
+                ]
+            }
+        },
+        "required": ["statusCode", "message"]
+    }
+}
