@@ -14,7 +14,5 @@ function createRouter() {
     // This is the device endpoint, mounted for demo purposes
     router.prefix('/device', require('../endpoints/device/'));
 
-    console.log('router', router.routeMap);
-
     return router;
 }

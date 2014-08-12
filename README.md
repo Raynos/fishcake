@@ -1,48 +1,52 @@
-# my-test
+# playdoh api scaffold
 
-a test
+This repository is an example of how you might build and structure
+    a non trivial node service (an API service).
 
-## Links
+The scope of this project is to show how you scaffold an API
+    with the following features
 
- - [git repository viewer][repo]
- - [project wiki][wiki]
- - [your jenkins job][jenkins]
+ - HTTP server
+ - Configuration
+ - Validation
+ - Business logic ( Domain )
+ - Calling out to external services.
+ - Calling out to databases.
+ - Unit tests
+ - Integration tests
 
-## Running the process
+## Temporary lib dependencies
 
-```sh
-node server.js --port=3000
-```
+The following "modules" have been "inlined" into a lib folder
+    and would actuall be external modules when building a real
+    service.
 
-// TODO write docs on how to start this process
+ - `server/lib/playdoh-clients.js` would be an external module
+ - `server/lib/create-server.js` would be `playdoh-api/server`
+ - `routes-router` would be `playdoh-api/router`
+ - `rtapi-router` would be `typed-request`
+ - `endpoints/*/lib/mount-endpoint.js` would be `playdoh-api/endpoint`
 
-## Overview
+## Folder structure
 
-// TODO write the overview of what this service does
+ - `README.md` -- top level documentation of your service
+ - `udeploy/` -- put your udeploy config & scripts here
+ - `server/` -- contains base server. Contains stateful clients
+    - `server.js` -- the entry point to your process. Keep this
+        as lightweight as possible. This sets up global concerns
+        like listening to a port or setting up uncaught exception
+    - `router.js` -- configure your top level HTTP routes here.
+    - `package.json` -- dependencies for the server & clients
+    - `lib/` -- should be empty, look in `node_modules/` instead.
+    - `config/`-- the config folder.
 
-## Tests
+## Philosophies
 
-`npm test`
+ - Do not `require('../')`
+ - Do not have stateful requires.
+ - Do develop endpoint folders as standalone units.
+ - Do put everything in `node_modules`. Creating new modules
+    is cheap, make lot's of them.
+ - zero shared code (except `node_modules`) between server & endpoint
+ - lightweight static server
 
-For code coverage run `npm run cover` and `npm run view-cover`
-
-## Run targets
-
- - `npm test` to run your tests
- - `npm run watch` to run your node server in watch mode
- - `npm run fast-test` to run just the fast tests
- - `npm run jshint` to run just the hinter
- - `npm run cover` to run all tests with coverage on
- - `npm run view-cover` to open coverage report in browser
- - `npm run shrinkwrap` to shrinkwrap your dependencies
- - `npm run changelog-patch` bump the patch version & update changelog
- - `npm run changelog-minor` bump the minor version & update changelog
- - `npm run changelog-major` bump the major version & update changelog
-
-## Contributors
-
- - Raynos
-
-  [repo]: https://code.uberinternal.com/diffusion/RTMYT/
-  [wiki]: https://code.uberinternal.com/w/repo/rt/my-test/
-  [jenkins]: https://ci.uber.com/view/Tests/job/test-my-test/
