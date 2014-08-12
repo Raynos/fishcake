@@ -1,8 +1,15 @@
 var createEndpoint = require('rtapi-router');
 var createRouter = require('routes-router');
+var path = require('path');
+var fs = require('fs');
+
+module.exports = mountEndpoint;
 
 function mountEndpoint(specDir, specs) {
     var router = createRouter();
+    var specFolder = path.join(specDir, 'specs');
+
+    var specSchemas = loadSchemas(specFolder);
 
     var descriptiveSpec = toDescriptive(specs);
 
@@ -12,13 +19,15 @@ function mountEndpoint(specDir, specs) {
 
         Object.keys(endpoint).forEach(function addMethod(method) {
             var methodHandler = endpoint[method];
-            var schema = toDescriptiveMethod(methodHandler.schema);
+            var schema = resolveSchemas(
+                specSchemas, methodHandler.schema);
+            schema = toDescriptiveMethod(schema);
             var handler = toDescriptiveHandler(methodHandler.handler);
 
             handlers[method] = createEndpoint(
                 schema,
                 handler,
-                { specDir: specDir + '/specs' }
+                { specDir: specFolder }
             );
         });
 
@@ -28,7 +37,39 @@ function mountEndpoint(specDir, specs) {
     return router;
 }
 
-module.exports = mountEndpoint;
+function loadSchemas(specFolder) {
+    var specSchemas = {};
+    var files = fs.readdirSync(specFolder);
+    var jsonFiles = files.filter(function isJSON(fileName) {
+        return /\.json$/.test(fileName);
+    });
+
+    var jsons = jsonFiles.map(function loadFile(fileName) {
+        return require(path.join(specFolder, fileName));
+    });
+
+    jsons.forEach(function addSchema(jsonObj) {
+        if (jsonObj && typeof jsonObj.id === 'string') {
+            specSchemas[jsonObj.id] = jsonObj;
+        }
+    });
+
+    return specSchemas;
+}
+
+function resolveSchemas(specSchemas, schemas) {
+    var schema = {};
+
+    Object.keys(schemas).forEach(function addSchema(version) {
+        if (typeof schemas[version] === 'string') {
+            schema[version] = specSchemas[schemas[version]];
+        } else {
+            schema[version] = schemas[version];
+        }
+    });
+
+    return schema;
+}
 
 function toDescriptive(specs) {
     var descriptiveSpec = {};
@@ -89,8 +130,14 @@ function toDescriptiveMethod(schemas) {
             }
         };
         httpSchema.response = {
-            body: response,
-            statusCode: 200
+            type: 'object',
+            properties: {
+                body: response,
+                statusCode: {
+                    type: 'number',
+                    enum: [200]
+                }
+            }
         };
 
         schema[version] = httpSchema;

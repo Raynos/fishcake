@@ -4,7 +4,7 @@ var IncorrectPassword = require('./errors').IncorrectPassword;
 
 module.exports = authClient;
 
-function authClient(credentials, clients, cb) {
+function authClient(clients, credentials, cb) {
     var id = credentials.id;
     var password = credentials.password;
 

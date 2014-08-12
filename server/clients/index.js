@@ -1,6 +1,7 @@
 var createLogger = require('../lib/playdoh-clients/logger.js');
 var createStatsd = require('../lib/playdoh-clients/statsd.js');
 var createUncaught = require('../lib/playdoh-clients/uncaught.js');
+var createONClient = require('./on-client.js');
 // var createApi = require('./api-client.js');
 var createLevel = require('./level.js');
 
@@ -12,8 +13,16 @@ function createClients(config) {
     clients.statsd = createStatsd(config, clients);
     clients.logger = createLogger(config, clients);
     clients.onError = createUncaught(config, clients);
-    // clients.api = createApi(config.get('api'), clients);
-    clients.level = createLevel(config.get('level'), clients);
+    clients.onClient = createONClient(config, clients);
+    // clients.api = createApi(config, clients);
+    clients.level = createLevel(config, clients);
+
+    clients.destroy = destroy;
 
     return clients;
+
+    function destroy() {
+        // destroy other stateful clients here.
+        clients.level.close();
+    }
 }

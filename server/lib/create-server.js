@@ -11,6 +11,7 @@ function createServer(handler, opts) {
     var server = http.createServer(routeHandler);
     var config = opts.config;
     var clients = opts.clients;
+    var services = opts.services;
 
     //TODO replace me with decent logger
     server.on('request', function onRequest(req) {
@@ -40,7 +41,8 @@ function createServer(handler, opts) {
 
         return handler(req, res, {
             config: config,
-            clients: clients
+            clients: clients,
+            services: services
         }, defaultErrorHandler);
 
         /*

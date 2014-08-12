@@ -1,34 +1,29 @@
 var test = require('tape');
 var http = require('http');
 var request = require('request');
-var ONClient = require('rt-on-client');
 
-var endpoint = require('../index.js');
+var createService = require('../server.js');
 
 var PORT = Math.round((Math.random() * 10000) + 20000);
 var ON_PORT = PORT + 1;
-var server;
+var service;
 var onServer;
 
 test('start server', function t(assert) {
     onServer = ONServer();
     onServer.listen(ON_PORT);
 
-    server = http.createServer(function watClientz(req, res) {
-        endpoint(req, res, {
-            clients: {
-                onClient: new ONClient({
-                    host: 'localhost',
-                    port: ON_PORT
-                })
-            }
-        });
+    service = createService({
+        onClient: {
+            host: 'localhost',
+            port: ON_PORT
+        }
     });
-    server.listen(PORT, assert.end);
+    service.server.listen(PORT, assert.end);
 });
 
 test('make auth request', function t(assert) {
-    var url = 'http://localhost:' + PORT + '/';
+    var url = 'http://localhost:' + PORT + '/auth';
     request({
         url: url,
         method: 'POST',
@@ -48,7 +43,7 @@ test('make auth request', function t(assert) {
 });
 
 test('auth fails with bad password', function t(assert) {
-    var url = 'http://localhost:' + PORT + '/';
+    var url = 'http://localhost:' + PORT + '/auth';
 
     request({
         url: url,
@@ -62,7 +57,7 @@ test('auth fails with bad password', function t(assert) {
         assert.ifError(err);
 
         assert.equal(resp.statusCode, 400);
-        assert.equal(resp.body.errors[0].type,
+        assert.equal(resp.body.type,
             'auth.common.incorrectPassword');
 
         assert.end();
@@ -70,7 +65,7 @@ test('auth fails with bad password', function t(assert) {
 });
 
 test('auth fails with unknown id', function t(assert) {
-    var url = 'http://localhost:' + PORT + '/';
+    var url = 'http://localhost:' + PORT + '/auth';
 
     request({
         url: url,
@@ -84,15 +79,15 @@ test('auth fails with unknown id', function t(assert) {
         assert.ifError(err);
 
         assert.equal(resp.statusCode, 500);
-        assert.equal(resp.body.errors[0].message,
-            'Not Found');
+        assert.equal(resp.body.message, 'Internal Server Error');
 
         assert.end();
     });
 });
 
 test('teardown server', function t(assert) {
-    server.close();
+    service.server.close();
+    service.clients.destroy();
     onServer.close();
     assert.end();
 });

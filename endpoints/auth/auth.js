@@ -1,6 +1,3 @@
-var authenticateClient = require('./domain/auth-client.js');
-var authenticateDriver = require('./domain/auth-driver.js');
-
 module.exports = authHandler;
 
 function authHandler(incoming, opts, cb) {
@@ -9,12 +6,12 @@ function authHandler(incoming, opts, cb) {
         password: incoming.password,
         app: incoming.app
     };
-    var clients = opts.clients;
+    var auth = opts.services.auth;
 
     if (credentials.app === 'client') {
-        authenticateClient(credentials, clients, onResult);
+        auth.authenticateClient(credentials, onResult);
     } else {
-        authenticateDriver(credentials, clients, onResult);
+        auth.authenticateDriver(credentials, onResult);
     }
 
     function onResult(err, token) {

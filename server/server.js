@@ -4,22 +4,32 @@ var fetchConfig = require('playdoh-server/config');
 var process = require('process');
 
 var createServer = require('./lib/create-server.js');
-var createRouter = require('./router.js');
+var createRouter = require('./http-router.js');
 var createClients = require('./clients/');
+var createServices = require('../business/');
 
-function main() {
+function main(seedConfig) {
     var service = {};
     var config = service.config = fetchConfig(__dirname, {
         dc: process.env.NODE_ENV === 'production' ?
             '/etc/uber/datacenter' : null
     });
+
+    if (seedConfig) {
+        Object.keys(seedConfig).forEach(function setConfig(k) {
+            config.set(k, seedConfig[k]);
+        });
+    }
+
     var clients = service.clients = createClients(config);
+    var services = service.services = createServices(clients);
 
     var router = createRouter(config, clients);
     service.router = router;
     service.server = createServer(router, {
         config: config,
-        clients: clients
+        clients: clients,
+        services: services
     });
 
     return service;

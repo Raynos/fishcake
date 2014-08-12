@@ -1,4 +1,5 @@
 {
+    "id": "http://demo.uber.com/spec/health-v1.0.0",
     "description": "/health version 1.0.0",
     "response": {
         "type": "string"

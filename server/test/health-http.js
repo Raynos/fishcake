@@ -1,19 +1,18 @@
 var test = require('tape');
-var http = require('http');
 var request = require('request');
 
-var endpoint = require('../index.js');
+var createService = require('../server.js');
 
 var PORT = Math.round((Math.random() * 10000) + 20000);
-var server;
+var service;
 
 test('start server', function t(assert) {
-    server = http.createServer(endpoint);
-    server.listen(PORT, assert.end);
+    service = createService();
+    service.server.listen(PORT, assert.end);
 });
 
 test('make health request', function t(assert) {
-    var url = 'http://localhost:' + PORT + '/';
+    var url = 'http://localhost:' + PORT + '/health';
     request({
         url: url, json: true
     }, function onResp(err, resp) {
@@ -27,6 +26,7 @@ test('make health request', function t(assert) {
 });
 
 test('teardown server', function t(assert) {
-    server.close();
+    service.server.close();
+    service.clients.destroy();
     assert.end();
 });

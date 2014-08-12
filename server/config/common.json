@@ -12,5 +12,9 @@
 
     "level": {
         "dbPath": "/tmp/playdoh-scaffold-test"
+    },
+    "onClient": {
+        "host": "localhost",
+        "port": 5515
     }
 }

@@ -1,47 +1,45 @@
 var test = require('tape');
 
-var auth = require('../auth.js');
+var auth = require('../auth/');
 
-var onClient = {
-    fetch: function fetch(key, id, opts, cb) {
-        if (id === 'foo') {
-            cb(null, {
-                password: 'bar',
-                token: 'hello'
-            });
-        } else {
-            cb(new Error('unknown user'));
+var clients = {
+    onClient: {
+        fetch: function fetch(key, id, opts, cb) {
+            if (id === 'foo') {
+                cb(null, {
+                    password: 'bar',
+                    token: 'hello'
+                });
+            } else {
+                cb(new Error('unknown user'));
+            }
         }
     }
 };
 
 test('auth returns token', function t(assert) {
-    auth({
+    var service = auth(clients);
+
+    service.authenticateClient({
         app: 'client',
         id: 'foo',
         password: 'bar'
-    }, {
-        clients: {
-            onClient: onClient
-        }
     }, function onAuth(err, result) {
         assert.ifError(err);
 
-        assert.equal(result.token, 'hello');
+        assert.equal(result, 'hello');
 
         assert.end();
     });
 });
 
 test('auth fails with bad password', function t(assert) {
-    auth({
+    var service = auth(clients);
+
+    service.authenticateClient({
         app: 'client',
         id: 'foo',
         password: 'bad'
-    }, {
-        clients: {
-            onClient: onClient
-        }
     }, function onAuth(err, result) {
         assert.ok(err);
         assert.equal(err.type, 'auth.common.incorrectPassword');
@@ -54,13 +52,11 @@ test('auth fails with bad password', function t(assert) {
 });
 
 test('auth fails with unknown id', function t(assert) {
-    auth({
+    var service = auth(clients);
+
+    service.authenticateClient({
         app: 'client',
         id: 'bar'
-    }, {
-        clients: {
-            onClient: onClient
-        }
     }, function onAuth(err, result) {
         assert.ok(err);
         assert.equal(err.message, 'unknown user');

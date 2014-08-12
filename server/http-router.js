@@ -14,5 +14,7 @@ function createRouter() {
     // This is the device endpoint, mounted for demo purposes
     router.prefix('/device', require('../endpoints/device/'));
 
+    router.prefix('/static-lulz', require('./http/static-lulz.js'));
+
     return router;
 }

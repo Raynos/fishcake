@@ -4,15 +4,19 @@ var MockResponse = require('hammock/response');
 
 var endpoint = require('../index.js');
 
-var onClient = {
-    fetch: function fetch(key, id, opts, cb) {
-        if (id === 'foo') {
-            cb(null, {
-                password: 'bar',
-                token: 'hello'
-            });
-        } else {
-            cb(new Error('unknown user'));
+var services = {
+    auth: {
+        authenticateClient: function auth(opts, cb) {
+            if (opts.id === 'foo' && opts.password === 'bar') {
+                cb(null, 'hello');
+            } else if (opts.id === 'foo') {
+                cb({
+                    statusCode: 400,
+                    type: 'auth.common.incorrectPassword'
+                });
+            } else {
+                cb(new Error('unknown user'));
+            }
         }
     }
 };
@@ -38,7 +42,7 @@ test('auth returns token', function t(assert) {
     });
 
     endpoint(req, res, {
-        clients: { onClient: onClient }
+        services: services
     }, function onEndpoint(err) {
         called = true;
         assert.ifError(err);
@@ -62,7 +66,7 @@ test('auth fails with bad password', function t(assert) {
     });
 
     endpoint(req, res, {
-        clients: { onClient: onClient }
+        services: services
     }, function onEndpoint(err) {
         assert.equal(err.type, 'auth.common.incorrectPassword');
         assert.equal(err.statusCode, 400);
@@ -88,7 +92,7 @@ test('auth fails with unknown id', function t(assert) {
     });
 
     endpoint(req, res, {
-        clients: { onClient: onClient }
+        services: services
     }, function onEndpoint(err) {
         assert.equal(err.message, 'unknown user');
 

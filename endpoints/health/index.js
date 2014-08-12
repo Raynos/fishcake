@@ -1,3 +1,4 @@
+var path = require('path');
 var mountEndpoint = require('./lib/mount-endpoint');
 
 var specs = {
@@ -6,10 +7,11 @@ var specs = {
         'index': {
             handler: require('./health.js'),
             schema: {
-                '1.0.0': require('./specs/health-v1.0.0.json')
+                '1.0.0': 'http://demo.uber.com/spec/health-v1.0.0'
             }
         }
     }
 };
 
-module.exports = mountEndpoint(__dirname, specs);
+module.exports = mountEndpoint(
+    path.join(__dirname, '..', '..'), specs);
