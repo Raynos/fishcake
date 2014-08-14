@@ -1,6 +1,6 @@
-var createLogger = require('../lib/playdoh-clients/logger.js');
-var createStatsd = require('../lib/playdoh-clients/statsd.js');
-var createUncaught = require('../lib/playdoh-clients/uncaught.js');
+var createLogger = require('playdoh-clients/logger.js');
+var createStatsd = require('playdoh-clients/statsd.js');
+var createUncaught = require('playdoh-clients/uncaught.js');
 var createONClient = require('./on-client.js');
 // var createApi = require('./api-client.js');
 var createLevel = require('./level.js');

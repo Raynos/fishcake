@@ -15,17 +15,6 @@ The scope of this project is to show how you scaffold an API
  - Unit tests
  - Integration tests
 
-## Temporary lib dependencies
-
-The following "modules" have been "inlined" into a lib folder
-    and would actuall be external modules when building a real
-    service.
-
- - `server/lib/playdoh-clients.js` would be an external module
- - `server/lib/create-server.js` would be `playdoh-api/server`
- - `routes-router` would be `playdoh-api/router`
- - `rtapi-router` would be `typed-request`
- - `endpoints/*/lib/mount-endpoint.js` would be `playdoh-api/endpoint`
 
 ## Folder structure
 

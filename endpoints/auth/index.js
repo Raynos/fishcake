@@ -1,5 +1,5 @@
 var path = require('path');
-var mountEndpoint = require('fumes/endpoint');
+var mountEndpoint = require('sirvice/endpoint');
 
 var specs = {
     rpc: {

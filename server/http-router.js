@@ -1,4 +1,4 @@
-var Router = require('fumes/router');
+var Router = require('sirvice/router');
 
 module.exports = createRouter;
 
