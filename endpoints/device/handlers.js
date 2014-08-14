@@ -1,5 +1,3 @@
-var deviceRepo = require('./repository');
-
 var errors = require('./errors.js');
 
 module.exports = {
@@ -11,92 +9,71 @@ module.exports = {
 };
 
 function queryAll(incoming, opts, cb) {
-    var db = opts.clients.level;
+    var device = opts.services.device;
 
     if ('userId' in incoming) {
-        deviceRepo.getFor(db, 'userId', incoming.userId, cb);
+        device.getByUserId(incoming.userId, cb);
     } else {
-        deviceRepo.getAll(db, cb);
+        device.getAll(cb);
     }
 }
 
 function getOne(incoming, opts, cb) {
-    var db = opts.clients.level;
+    var device = opts.services.device;
 
-    deviceRepo.getById(db, incoming.id, cb);
+    device.getById(incoming.id, cb);
 }
 
 function create(incoming, opts, cb) {
-    var db = opts.clients.level;
+    var device = opts.services.device;
 
-    deviceRepo.insert(db, [incoming], onInsert);
-
-    function onInsert(err, records) {
-        if (err) {
-            return cb(err);
-        }
-
-        cb(null, records[0]);
-    }
+    // device.create not implemented for demo
+    device.create(incoming, cb);
 }
 
 function update(incoming, opts, cb) {
-    var db = opts.clients.level;
+    var device = opts.services.device;
 
-    // incoming has one required field (id)
-    if (Object.keys(incoming).length <= 1) {
+    // Need at least one key else its an invalid POST
+    if (Object.keys(incoming).length === 1) {
         return cb(errors.EmptyBody());
     }
 
-    var delta = {};
-    ['deviceToken', 'userId', 'type', 'name']
-        .forEach(function setDelta(key) {
-            if (key in incoming) {
-                delta[key] = incoming[key];
-            }
-        });
+    var delta = pluck(incoming, [
+        'deviceToken', 'userId', 'type', 'name'
+    ]);
 
     // never do update(id, incoming). Always build the delta
     // object manually, never send user input directly into
     // the database without clipping / filtering it.
-    deviceRepo.update(db, incoming.id, delta, onUpdate);
-
-    function onUpdate(err, record) {
-        if (err && err.type === 'not.found') {
-            return cb(errors.NotFound({
-                id: incoming.id
-            }));
-        }
-
-        cb(null, record);
-    }
+    // device.update not implemented for demo
+    device.update(incoming.id, delta, cb);
 }
 
 function destroy(incoming, opts, cb) {
-    var db = opts.clients.level;
+    var device = opts.services.device;
 
-    // do an extra GET to return a 404 before deleting.
-    deviceRepo.getById(db, incoming.id, onGet);
+    // device.remove not implemented for demo
+    device.remove(incoming.id, onRemove);
 
-    function onGet(err, record) {
+    function onRemove(err) {
         if (err) {
             return cb(err);
         }
 
-        if (record === null) {
-            return cb(errors.NotFound({
-                id: incoming.id
-            }));
-        }
+        cb(null, { ok: true });
+    }
+}
 
-        deviceRepo.remove(db, incoming.id, onRemove);
+function pluck(obj, keys) {
+    var result = {};
+    keys.forEach(setKey);
 
-        function onRemove(err)  {
-            if (err) {
-                return cb(err);
-            }
+    return result;
 
-            cb(null, { ok: true });
+    function setKey(key) {
+        if (key in obj) {
+            result[key] = obj[key];
         }
     }
 }

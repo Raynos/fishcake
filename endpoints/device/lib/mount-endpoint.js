@@ -21,7 +21,7 @@ function mountEndpoint(specDir, specs) {
             var methodHandler = endpoint[method];
             var schema = resolveSchemas(
                 specSchemas, methodHandler.schema);
-            schema = toDescriptiveMethod(schema);
+            schema = toDescriptiveMethod(schema, method);
             var handler = toDescriptiveHandler(methodHandler.handler);
 
             handlers[method] = createEndpoint(
@@ -113,20 +113,24 @@ function toDescriptive(specs) {
     return descriptiveSpec;
 }
 
-function toDescriptiveMethod(schemas) {
+function toDescriptiveMethod(schemas, method) {
     var schema = {};
 
     Object.keys(schemas).forEach(function addSchema(version) {
         var httpSchema = {};
         var methodSchema = schemas[version];
 
-        var request = methodSchema.request || {};
+        var bodyRequest = method !== 'GET' ?
+            (methodSchema.request || {}) : {};
+        var queryRequest = method !== 'POST' ?
+            (methodSchema.request || {}) : {};
         var response = methodSchema.response || {};
 
         httpSchema.request = {
             type: 'object',
             properties: {
-                body: request
+                body: bodyRequest,
+                query: queryRequest
             }
         };
         httpSchema.response = {
@@ -148,7 +152,8 @@ function toDescriptiveMethod(schemas) {
 
 function toDescriptiveHandler(handler) {
     return function typedHandler(typedRequest, opts, cb) {
-        var incoming = typedRequest.body;
+        var incoming = typedRequest.body ||
+            typedRequest.query;
 
         handler(incoming, opts, onResult);
 

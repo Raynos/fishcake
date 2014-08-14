@@ -1,1 +1,1 @@
-require('./handlers.js');
+require('./device-endpoint.js');

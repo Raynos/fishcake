@@ -1,5 +1,5 @@
 {
-    "id": "uber-schema://demo/1.0.0/device",
+    "id": "http://demo.uber.com/spec/device-v1.0.0",
     "type": "object",
     "properties": {
         "id": { "type": "number" },

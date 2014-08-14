@@ -1,16 +1,50 @@
-var Repository = require('evented-repository/level');
+var SubLevel = require('level-sublevel');
+var through = require('through2').obj;
+var toStream = require('callback-stream');
 
 var DeviceDecoder = require('./entities/device-decoder.js');
-var DeviceEncoder = require('./entities/device-encoder.js');
 
 module.exports = DeviceService;
 
 function DeviceService(clients) {
-    var repo = Repository(clients.level, {
-        namespace: 'devices',
-        encoder: DeviceEncoder,
-        decoder: DeviceDecoder
-    });
+    var level = clients.level;
+    var db = SubLevel(level).sublevel('devices');
 
-    return repo;
+    return {
+        getAll: getAll,
+        getByUserId: getByUserId
+        // OTHER METHODS TBD
+    };
+
+    function getStream() {
+        return db.createValueStream()
+            .pipe(through(toDevice));
+
+        function toDevice(chunk, _, cb) {
+            this.push(DeviceDecoder(chunk));
+            cb();
+        }
+    }
+
+    function getAll(cb) {
+        getStream().pipe(toStream({
+            objectMode: true
+        }, cb));
+    }
+
+    function getByUserId(userId, cb) {
+        getStream()
+            .pipe(through(filterByUserId))
+            .pipe(toStream({
+                objectMode: true
+            }, cb));
+
+        function filterByUserId(chunk, _, cb) {
+            if (chunk.userId === userId) {
+                this.push(chunk);
+            }
+
+            cb();
+        }
+    }
 }

@@ -2,19 +2,19 @@ var test = require('tape');
 var LevelMem = require('level-mem');
 var SubLevel = require('level-sublevel');
 
-var handlers = require('../handlers.js');
+var device = require('../device/');
 
 test('get items', function t(assert) {
     var db = LevelMem('dbname', { encoding: 'json' });
 
     // interface for getting the devices table
-    var devices = SubLevel(db).sublevel('devices');
-    devices.put(0, { id: 0 });
-    devices.put(1, { id: 1 });
+    var devicesDb = SubLevel(db).sublevel('devices');
+    devicesDb.put(0, { id: 0 });
+    devicesDb.put(1, { id: 1 });
 
-    handlers.queryAll({}, {
-        clients: { level: db }
-    }, function onValues(err, resp) {
+    var service = device({ level: db });
+
+    service.getAll(function onValues(err, resp) {
         assert.ifError(err);
 
         assert.equal(resp.length, 2);
@@ -36,10 +36,10 @@ test('get items by userId', function t(assert) {
     devices.put(1, { id: 1, user_id: 12 });
     devices.put(2, { id: 2, user_id: 10 });
 
+    var service = device({ level: db });
+
     // when querying the handler use the domain interface
-    handlers.queryAll({ userId: 10 }, {
-        clients: { level: db }
-    }, function onValues(err, resp) {
+    service.getByUserId(10, function onValues(err, resp) {
         assert.ifError(err);
 
         assert.equal(resp.length, 2);

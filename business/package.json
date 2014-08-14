@@ -7,14 +7,21 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/index.js | tap-spec",
+    "fast-test": "node test/fast.js | tap-spec"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "level-mem": "^0.18.0",
+    "tap-spec": "^0.2.0",
     "tape": "git://github.com/Raynos/tape#global-hack"
   },
   "dependencies": {
-    "error": "^4.1.1"
+    "callback-stream": "^1.0.2",
+    "concat-stream": "^1.4.6",
+    "error": "^4.1.1",
+    "level-sublevel": "^6.2.2",
+    "through2": "^0.6.1"
   }
 }

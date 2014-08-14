@@ -1,5 +1,6 @@
 {
     "description": "/devices version 1.0.0",
+    "id": "http://demo.uber.com/spec/device-query-all-v1.0.0",
     "request": {
         "type": "object",
         "properties": {
@@ -9,7 +10,10 @@
         }
     },
     "response": {
-        "$ref": "uber-schema://demo/1.0.0/device"
+        "type": "array",
+        "items": {
+            "$ref": "http://demo.uber.com/spec/device-v1.0.0"
+        }
     },
     "error": {
         "type": "object",
