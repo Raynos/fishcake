@@ -1,5 +1,5 @@
 var path = require('path');
-var mountEndpoint = require('./lib/mount-endpoint');
+var mountEndpoint = require('fumes/endpoint');
 
 var specs = {
     // queries compile to GET

@@ -2,8 +2,8 @@
 var hostname = require('os').hostname;
 var fetchConfig = require('playdoh-server/config');
 var process = require('process');
+var createServer = require('fumes/server.js');
 
-var createServer = require('./lib/create-server.js');
 var createRouter = require('./http-router.js');
 var createClients = require('./clients/');
 var createServices = require('../business/');

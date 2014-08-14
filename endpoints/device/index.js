@@ -1,5 +1,5 @@
 var path = require('path');
-var mountEndpoint = require('./lib/mount-endpoint.js');
+var mountEndpoint = require('fumes/endpoint.js');
 
 var handlers = require('./handlers.js');
 
