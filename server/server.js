@@ -15,6 +15,7 @@ function main(seedConfig) {
             '/etc/uber/datacenter' : null
     });
 
+    // seedConfig is test only stuff.
     if (seedConfig) {
         Object.keys(seedConfig).forEach(function setConfig(k) {
             config.set(k, seedConfig[k]);
