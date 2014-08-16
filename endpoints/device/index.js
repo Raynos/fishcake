@@ -5,7 +5,7 @@ var handlers = require('./handlers.js');
 
 module.exports = mountEndpoint(
     path.join(__dirname, '..'),
-    require('./spec.json'),
+    require('./specs/spec.json'),
     {
         queryAll: handlers.queryAll,
         create: handlers.create,

@@ -3,7 +3,7 @@ var mountEndpoint = require('sirvice/endpoint');
 
 module.exports = mountEndpoint(
     path.join(__dirname, '..'),
-    require('./spec.json'),
+    require('./specs/spec.json'),
     {
         health: require('./health.js')
     }
