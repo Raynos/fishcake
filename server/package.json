@@ -12,12 +12,13 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
-    "sirvice": "git+ssh://git@github.com:uber/sirvice#dev",
     "level": "^0.18.0",
+    "playdoh-clients": "git+ssh://gitolite@code.uber.internal:rt/playdoh-clients",
     "playdoh-server": "git+ssh://gitolite@code.uber.internal:github/uber/playdoh-server#v2.3.1",
     "process": "^0.7.0",
     "rt-on-client": "git+ssh://gitolite@code.uber.internal:rt/on-client#v1.3.0",
     "run-with": "git+ssh://gitolite@code.uber.internal:rt/run-with.git#v1.0.0",
+    "sirvice": "git+ssh://git@github.com:uber/sirvice#dev",
     "xtend": "^4.0.0"
   },
   "devDependencies": {
