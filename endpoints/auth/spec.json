@@ -1,4 +1,5 @@
 {
+    "id": "http://demo.uber.com/spec/auth",
     "rpc": {
         "index": {
             "handlerId": "auth",
