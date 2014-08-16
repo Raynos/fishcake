@@ -4,14 +4,12 @@
   "description": "This is a simple example of an endpoint",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/index.js | tap-spec"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "sirvice": "git+ssh://git@github.com:uber/sirvice",
-    "routes-router": "^4.1.0",
-    "rtapi-router": "git+ssh://gitolite@code.uber.internal:rt/rtapi-router"
+    "sirvice": "git+ssh://git@github.com:uber/sirvice#dev"
   },
   "devDependencies": {
     "body": "^4.5.0",
@@ -19,6 +17,7 @@
     "request": "^2.40.0",
     "rt-on-client": "git+ssh://gitolite@code.uber.internal:rt/on-client",
     "send-data": "^3.3.1",
+    "tap-spec": "^0.2.0",
     "tape": "git://github.com/Raynos/tape#global-hack"
   }
 }

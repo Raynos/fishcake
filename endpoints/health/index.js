@@ -14,4 +14,4 @@ var specs = {
 };
 
 module.exports = mountEndpoint(
-    path.join(__dirname, '..', '..'), specs);
+    path.join(__dirname, '..'), specs);

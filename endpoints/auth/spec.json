@@ -1,0 +1,10 @@
+{
+    "rpc": {
+        "index": {
+            "handlerId": "auth",
+            "schema": {
+                "1.0.0": "http://demo.uber.com/specs/auth-v1.0.0"
+            }
+        }
+    }
+}

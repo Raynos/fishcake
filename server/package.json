@@ -12,7 +12,7 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
-    "sirvice": "git+ssh://git@github.com:uber/sirvice",
+    "sirvice": "git+ssh://git@github.com:uber/sirvice#dev",
     "level": "^0.18.0",
     "playdoh-server": "git+ssh://gitolite@code.uber.internal:github/uber/playdoh-server#v2.3.1",
     "process": "^0.7.0",
