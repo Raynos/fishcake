@@ -1,17 +1,10 @@
 var path = require('path');
 var mountEndpoint = require('sirvice/endpoint');
 
-var specs = {
-    // queries compile to GET
-    read: {
-        'index': {
-            handler: require('./health.js'),
-            schema: {
-                '1.0.0': 'http://demo.uber.com/spec/health-v1.0.0'
-            }
-        }
-    }
-};
-
 module.exports = mountEndpoint(
-    path.join(__dirname, '..'), specs);
+    path.join(__dirname, '..'),
+    require('./spec.json'),
+    {
+        health: require('./health.js')
+    }
+);
