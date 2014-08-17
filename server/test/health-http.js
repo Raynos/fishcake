@@ -19,7 +19,7 @@ test('make health request', function t(assert) {
         assert.ifError(err);
 
         assert.equal(resp.statusCode, 200);
-        assert.equal(resp.body, { status: 'ok' });
+        assert.deepEqual(resp.body, { status: 'ok' });
 
         assert.end();
     });

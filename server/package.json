@@ -23,7 +23,7 @@
     "zero-config": "git+ssh://gitolite@code.uber.internal:github/uber/zero-config#v1.1.0"
   },
   "devDependencies": {
-    "cached-tape": "^1.1.0",
+    "cached-tape": "^2.0.0",
     "cuid": "^1.2.4",
     "graphite-dash-gen": "git+ssh://gitolite@code.uber.internal:dispatch/graphite-dash-gen#v1.2.0",
     "istanbul": "^0.2.7",
@@ -45,7 +45,7 @@
     "fast-test": "cached-tape ../endpoints/*/test/fast.js ../business/test/fast.js test/fast.js | tap-spec",
     "jshint": "jshint --verbose .",
     "jshint-pre-commit": "jshint --verbose $(git diff --cached --name-only --diff-filter=ACMRTUXB | grep '\\.js$')",
-    "cover": "istanbul cover --root .. node_modules/.bin/tape -- ../endpoints/*/test/index.js",
+    "cover": "istanbul cover --root .. node_modules/.bin/cached-tape -- ../endpoints/*/test/index.js ../business/test/index.js test/index.js",
     "fast-cover": "istanbul cover --root .. node_modules/.bin/tape -- ../endpoints/*/test/fast.js",
     "view-cover": "istanbul report html && opn ./coverage/index.html",
     "shrinkwrap": "playdoh shrinkwrap",

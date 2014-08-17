@@ -16,7 +16,7 @@
     "sirvice": "git+ssh://gitolite@code.uber.internal:github/uber/sirvice#dev"
   },
   "devDependencies": {
-    "cached-tape": "^1.1.0",
+    "cached-tape": "^2.0.0",
     "hammock": "^0.1.9",
     "istanbul": "^0.3.0",
     "jshint": "^2.5.3",
