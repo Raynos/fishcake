@@ -19,7 +19,7 @@ test('endpoint writes to response', function t(assert) {
             assert.ifError(err);
 
             assert.equal(called, true);
-            assert.equal(resp.body, '"OK"');
+            assert.equal(resp.body, '{"status":"ok"}');
 
             assert.end();
         }),
