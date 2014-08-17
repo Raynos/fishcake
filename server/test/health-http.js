@@ -1,4 +1,4 @@
-var test = require('tape');
+var test = require('cached-tape');
 var request = require('request');
 
 var createService = require('../server.js');

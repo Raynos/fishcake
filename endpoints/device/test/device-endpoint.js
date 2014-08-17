@@ -1,4 +1,4 @@
-var test = require('tape');
+var test = require('cached-tape');
 var MockRequest = require('hammock/request');
 var MockResponse = require('hammock/response');
 

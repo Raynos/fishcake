@@ -1,4 +1,4 @@
-var test = require('tape');
+var test = require('cached-tape');
 var request = require('request');
 var cuid = require('cuid');
 var path = require('path');

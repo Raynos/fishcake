@@ -13,9 +13,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "cached-tape": "^1.1.0",
     "hammock": "^0.1.9",
-    "tap-spec": "^0.2.0",
-    "tape": "git://github.com/Raynos/tape#global-hack"
+    "tap-spec": "^0.2.0"
   },
   "dependencies": {
     "sirvice": "git+ssh://gitolite@code.uber.internal:github/uber/sirvice#dev"

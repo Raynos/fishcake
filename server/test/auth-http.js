@@ -1,4 +1,4 @@
-var test = require('tape');
+var test = require('cached-tape');
 var http = require('http');
 var request = require('request');
 

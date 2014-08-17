@@ -23,6 +23,7 @@
     "zero-config": "git+ssh://gitolite@code.uber.internal:github/uber/zero-config#v1.1.0"
   },
   "devDependencies": {
+    "cached-tape": "^1.1.0",
     "cuid": "^1.2.4",
     "graphite-dash-gen": "git+ssh://gitolite@code.uber.internal:dispatch/graphite-dash-gen#v1.2.0",
     "istanbul": "^0.2.7",
@@ -35,14 +36,13 @@
     "request": "^2.34.0",
     "rimraf": "^2.2.8",
     "send-data": "^3.3.2",
-    "tap-spec": "^0.1.8",
-    "tape": "git://github.com/Raynos/tape#global-hack"
+    "tap-spec": "^0.1.8"
   },
   "licenses": [],
   "scripts": {
-    "test": "npm run jshint -s && tape ../endpoints/*/test/index.js ../business/test/index.js test/index.js | tap-spec",
+    "test": "npm run jshint -s && cached-tape ../endpoints/*/test/index.js ../business/test/index.js test/index.js | tap-spec",
     "watch": "NODE_HEAPDUMP_OPTIONS=nosignal nodemon --ignore browser/ --exec 'node' server.js",
-    "fast-test": "tape ../endpoints/*/test/fast.js ../business/test/fast.js test/fast.js | tap-spec",
+    "fast-test": "cached-tape ../endpoints/*/test/fast.js ../business/test/fast.js test/fast.js | tap-spec",
     "jshint": "jshint --verbose .",
     "jshint-pre-commit": "jshint --verbose $(git diff --cached --name-only --diff-filter=ACMRTUXB | grep '\\.js$')",
     "cover": "istanbul cover --root .. node_modules/.bin/tape -- ../endpoints/*/test/index.js",
