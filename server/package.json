@@ -18,7 +18,7 @@
     "process": "^0.7.0",
     "rt-on-client": "git+ssh://gitolite@code.uber.internal:rt/on-client#v1.3.0",
     "run-with": "git+ssh://gitolite@code.uber.internal:rt/run-with.git#v1.0.0",
-    "sirvice": "git+ssh://git@github.com:uber/sirvice#dev",
+    "sirvice": "git+ssh://gitolite@code.uber.internal:github/uber/sirvice#dev",
     "xtend": "^4.0.0",
     "zero-config": "git+ssh://gitolite@code.uber.internal:github/uber/zero-config#v1.1.0"
   },

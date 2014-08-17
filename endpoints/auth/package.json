@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "sirvice": "git+ssh://git@github.com:uber/sirvice#dev"
+    "sirvice": "git+ssh://gitolite@code.uber.internal:github/uber/sirvice#dev"
   },
   "devDependencies": {
     "hammock": "^0.1.9",

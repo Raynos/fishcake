@@ -18,6 +18,6 @@
     "tape": "git://github.com/Raynos/tape#global-hack"
   },
   "dependencies": {
-    "sirvice": "git+ssh://git@github.com:uber/sirvice#dev"
+    "sirvice": "git+ssh://gitolite@code.uber.internal:github/uber/sirvice#dev"
   }
 }
