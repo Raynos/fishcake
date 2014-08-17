@@ -13,7 +13,7 @@ function main(seedConfig) {
     var service = {};
     var config = service.config = fetchConfig(__dirname, {
         dc: process.env.NODE_ENV === 'production' ?
-            '/etc/uber/datacenter' : null
+            /* istanbul ignore next */ '/etc/uber/datacenter' : null
     });
 
     // seedConfig is test only stuff.
@@ -40,6 +40,7 @@ function main(seedConfig) {
 
 module.exports = main;
 
+/* istanbul ignore if  */
 if (require.main === module) {
     // settings the process title allows a process monitor to
     // have a useful name for your process when monitoring it.
