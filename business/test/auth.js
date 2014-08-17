@@ -66,3 +66,19 @@ test('auth fails with unknown id', function t(assert) {
         assert.end();
     });
 });
+
+test('auth authenticate driver', function t(assert) {
+    var service = auth(clients);
+
+    service.authenticateDriver({
+        app: 'client',
+        id: 'bar'
+    }, function onAuth(err, result) {
+        assert.ok(err);
+        assert.equal(err.message, 'Not Implemented');
+
+        assert.equal(result, undefined);
+
+        assert.end();
+    });
+});

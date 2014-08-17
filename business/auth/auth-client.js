@@ -29,7 +29,7 @@ function checkPassword(password, realPassword) {
 }
 
 function hash(str) {
-    str = str || '';
+    str = str;
     var hashCombo = '';
 
     for (var i = 0; i < str.length; i++) {

@@ -3,6 +3,7 @@ var LevelMem = require('level-mem');
 var SubLevel = require('level-sublevel');
 
 var device = require('../device/');
+var DeviceDecoder = require('../device/entities/device-decoder.js');
 
 test('get items', function t(assert) {
     var db = LevelMem('dbname', { encoding: 'json' });
@@ -48,4 +49,37 @@ test('get items by userId', function t(assert) {
 
         assert.end();
     });
+});
+
+test('DeviceDecoder malformed', function t(assert) {
+    var obj = DeviceDecoder();
+
+    assert.equal(typeof obj.id, 'number');
+    assert.equal(typeof obj.deviceToken, 'string');
+    assert.equal(typeof obj.userId, 'number');
+    assert.equal(typeof obj.type, 'string');
+    assert.equal(typeof obj.name, 'string');
+
+    assert.end();
+});
+
+test('correct DeviceDecoder', function t(assert) {
+    /*jshint camelcase: false*/
+    var obj = DeviceDecoder({
+        id: 1,
+        device_token: 'foo',
+        user_id: 2,
+        type: 'bar',
+        name: 'baz'
+    });
+
+    assert.deepEqual(obj, {
+        id: 1,
+        deviceToken: 'foo',
+        userId: 2,
+        type: 'bar',
+        name: 'baz'
+    });
+
+    assert.end();
 });
