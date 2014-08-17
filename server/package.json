@@ -23,13 +23,17 @@
     "zero-config": "git+ssh://gitolite@code.uber.internal:github/uber/zero-config"
   },
   "devDependencies": {
+    "cuid": "^1.2.4",
     "graphite-dash-gen": "git+ssh://gitolite@code.uber.internal:dispatch/graphite-dash-gen#v1.2.0",
     "istanbul": "^0.2.7",
     "jshint": "^2.5.0",
+    "level-sublevel": "^6.3.1",
+    "monotonic-timestamp": "0.0.8",
     "nodemon": "^1.0.17",
     "opn": "^0.1.2",
     "playdoh": "git+ssh://gitolite@code.uber.internal:github/uber/playdoh#v2.5.0",
     "request": "^2.34.0",
+    "rimraf": "^2.2.8",
     "send-data": "^3.3.2",
     "tap-spec": "^0.1.8",
     "tape": "git://github.com/Raynos/tape#global-hack"
