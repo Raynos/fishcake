@@ -13,14 +13,14 @@
   },
   "dependencies": {
     "level": "^0.18.0",
-    "playdoh-clients": "git+ssh://gitolite@code.uber.internal:rt/playdoh-clients",
+    "playdoh-clients": "git+ssh://gitolite@code.uber.internal:rt/playdoh-clients#v1.1.0",
     "playdoh-perf": "git+ssh://gitolite@code.uber.internal:rt/playdoh-perf#v1.3.0",
     "process": "^0.7.0",
     "rt-on-client": "git+ssh://gitolite@code.uber.internal:rt/on-client#v1.3.0",
     "run-with": "git+ssh://gitolite@code.uber.internal:rt/run-with.git#v1.0.0",
     "sirvice": "git+ssh://git@github.com:uber/sirvice#dev",
     "xtend": "^4.0.0",
-    "zero-config": "git+ssh://gitolite@code.uber.internal:github/uber/zero-config"
+    "zero-config": "git+ssh://gitolite@code.uber.internal:github/uber/zero-config#v1.1.0"
   },
   "devDependencies": {
     "cuid": "^1.2.4",
