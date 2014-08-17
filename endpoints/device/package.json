@@ -7,7 +7,10 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node test/index.js | tap-spec",
+    "test": "npm run jshint && npm run cover",
+    "jshint": "jshint --verbose .",
+    "cover": "istanbul cover --print detail test/index.js && istanbul check-coverage --branches=100",
+    "view-cover": "istanbul report html && opn ./coverage/index.html",
     "fast-test": "node test/fast.js | tap-spec"
   },
   "author": "",
@@ -15,6 +18,9 @@
   "devDependencies": {
     "cached-tape": "^1.1.0",
     "hammock": "^0.1.9",
+    "istanbul": "^0.3.0",
+    "jshint": "^2.5.3",
+    "opn": "^1.0.0",
     "tap-spec": "^0.2.0"
   },
   "dependencies": {

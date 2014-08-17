@@ -1,11 +1,11 @@
-var errors = require('./errors.js');
+// var errors = require('./errors.js');
 
 module.exports = {
-    queryAll: queryAll,
-    getOne: getOne,
-    create: create,
-    update: update,
-    destroy: destroy
+    queryAll: queryAll
+    // getOne: getOne,
+    // create: create,
+    // update: update,
+    // destroy: destroy
 };
 
 function queryAll(incoming, opts, cb) {
@@ -18,62 +18,62 @@ function queryAll(incoming, opts, cb) {
     }
 }
 
-function getOne(incoming, opts, cb) {
-    var device = opts.services.device;
+// function getOne(incoming, opts, cb) {
+//     var device = opts.services.device;
 
-    device.getById(incoming.id, cb);
-}
+//     device.getById(incoming.id, cb);
+// }
 
-function create(incoming, opts, cb) {
-    var device = opts.services.device;
+// function create(incoming, opts, cb) {
+//     var device = opts.services.device;
 
-    // device.create not implemented for demo
-    device.create(incoming, cb);
-}
+//     // device.create not implemented for demo
+//     device.create(incoming, cb);
+// }
 
-function update(incoming, opts, cb) {
-    var device = opts.services.device;
+// function update(incoming, opts, cb) {
+//     var device = opts.services.device;
 
-    // Need at least one key else its an invalid POST
-    if (Object.keys(incoming).length === 1) {
-        return cb(errors.EmptyBody());
-    }
+//     // Need at least one key else its an invalid POST
+//     if (Object.keys(incoming).length === 1) {
+//         return cb(errors.EmptyBody());
+//     }
 
-    var delta = pluck(incoming, [
-        'deviceToken', 'userId', 'type', 'name'
-    ]);
+//     var delta = pluck(incoming, [
+//         'deviceToken', 'userId', 'type', 'name'
+//     ]);
 
-    // never do update(id, incoming). Always build the delta
-    // object manually, never send user input directly into
-    // the database without clipping / filtering it.
-    // device.update not implemented for demo
-    device.update(incoming.id, delta, cb);
-}
+//     // never do update(id, incoming). Always build the delta
+//     // object manually, never send user input directly into
+//     // the database without clipping / filtering it.
+//     // device.update not implemented for demo
+//     device.update(incoming.id, delta, cb);
+// }
 
-function destroy(incoming, opts, cb) {
-    var device = opts.services.device;
+// function destroy(incoming, opts, cb) {
+//     var device = opts.services.device;
 
-    // device.remove not implemented for demo
-    device.remove(incoming.id, onRemove);
+//     // device.remove not implemented for demo
+//     device.remove(incoming.id, onRemove);
 
-    function onRemove(err) {
-        if (err) {
-            return cb(err);
-        }
+//     function onRemove(err) {
+//         if (err) {
+//             return cb(err);
+//         }
 
-        cb(null, { ok: true });
-    }
-}
+//         cb(null, { ok: true });
+//     }
+// }
 
-function pluck(obj, keys) {
-    var result = {};
-    keys.forEach(setKey);
+// function pluck(obj, keys) {
+//     var result = {};
+//     keys.forEach(setKey);
 
-    return result;
+//     return result;
 
-    function setKey(key) {
-        if (key in obj) {
-            result[key] = obj[key];
-        }
-    }
-}
+//     function setKey(key) {
+//         if (key in obj) {
+//             result[key] = obj[key];
+//         }
+//     }
+// }

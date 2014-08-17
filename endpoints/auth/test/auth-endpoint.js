@@ -17,6 +17,9 @@ var services = {
             } else {
                 cb(new Error('unknown user'));
             }
+        },
+        authenticateDriver: function auth(opts, cb) {
+            cb(null, 'hello');
         }
     }
 };
@@ -101,6 +104,40 @@ test('auth fails with unknown id', function t(assert) {
 
     req.end(JSON.stringify({
         app: 'client',
+        id: 'bar',
+        password: 'dont care'
+    }));
+});
+
+test('auth authenticate driver', function t(assert) {
+    var called = false;
+
+    var req = MockRequest({
+        url: '/',
+        method: 'POST',
+        headers: { 'content-type': 'application/json' }
+    });
+    var res = MockResponse(function onResp(err, resp) {
+        assert.ifError(err);
+
+        var body = JSON.parse(resp.body);
+
+        assert.equal(called, true);
+        assert.equal(body.token, 'hello');
+        assert.equal(resp.statusCode, 200);
+
+        assert.end();
+    });
+
+    endpoint(req, res, {
+        services: services
+    }, function onEndpoint(err) {
+        called = true;
+        assert.ifError(err);
+    });
+
+    req.end(JSON.stringify({
+        app: 'driver',
         id: 'bar',
         password: 'dont care'
     }));
