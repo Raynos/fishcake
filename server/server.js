@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 var hostname = require('os').hostname;
-var fetchConfig = require('playdoh-server/config');
+var fetchConfig = require('zero-config');
 var process = require('process');
 var createServer = require('sirvice/server.js');
+var perf = require('playdoh-perf');
 
 var createRouter = require('./http-router.js');
 var createClients = require('./clients/');
@@ -26,6 +27,7 @@ function main(seedConfig) {
     var services = service.services = createServices(clients);
 
     var router = createRouter(config, clients);
+    service.controlPort = perf(config.get('perfSettings'));
     service.router = router;
     service.server = createServer(router, {
         config: config,
@@ -45,7 +47,7 @@ if (require.main === module) {
 
     var service = main();
     service.server.listen(service.config.get('port'));
-    service.server.perfServer
+    service.controlPort
         .listen(service.config.get('controlPort'));
 
     process.on('uncaughtException', service.clients.onError);

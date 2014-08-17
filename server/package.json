@@ -14,12 +14,13 @@
   "dependencies": {
     "level": "^0.18.0",
     "playdoh-clients": "git+ssh://gitolite@code.uber.internal:rt/playdoh-clients",
-    "playdoh-server": "git+ssh://gitolite@code.uber.internal:github/uber/playdoh-server#v2.3.1",
+    "playdoh-perf": "git+ssh://gitolite@code.uber.internal:rt/playdoh-perf#v1.3.0",
     "process": "^0.7.0",
     "rt-on-client": "git+ssh://gitolite@code.uber.internal:rt/on-client#v1.3.0",
     "run-with": "git+ssh://gitolite@code.uber.internal:rt/run-with.git#v1.0.0",
     "sirvice": "git+ssh://git@github.com:uber/sirvice#dev",
-    "xtend": "^4.0.0"
+    "xtend": "^4.0.0",
+    "zero-config": "git+ssh://gitolite@code.uber.internal:github/uber/zero-config"
   },
   "devDependencies": {
     "graphite-dash-gen": "git+ssh://gitolite@code.uber.internal:dispatch/graphite-dash-gen#v1.2.0",
@@ -29,6 +30,7 @@
     "opn": "^0.1.2",
     "playdoh": "git+ssh://gitolite@code.uber.internal:github/uber/playdoh#v2.5.0",
     "request": "^2.34.0",
+    "send-data": "^3.3.2",
     "tap-spec": "^0.1.8",
     "tape": "git://github.com/Raynos/tape#global-hack"
   },

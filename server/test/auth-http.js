@@ -13,12 +13,14 @@ test('start server', function t(assert) {
     onServer = ONServer();
     onServer.listen(ON_PORT);
 
+    console.log('slow as fuck');
     service = createService({
         onClient: {
             host: 'localhost',
             port: ON_PORT
         }
     });
+    console.log('why');
     service.server.listen(PORT, assert.end);
 });
 

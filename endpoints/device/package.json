@@ -14,8 +14,6 @@
   "license": "ISC",
   "devDependencies": {
     "hammock": "^0.1.9",
-    "level-mem": "^0.18.0",
-    "level-sublevel": "^6.2.2",
     "tap-spec": "^0.2.0",
     "tape": "git://github.com/Raynos/tape#global-hack"
   },
