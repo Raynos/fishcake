@@ -11,8 +11,8 @@
     "lint.engine": "JSHintLintEngine",
     "lint.engine.single.linter": "ArcanistJSHintLinter",
     "unit.engine": "TAPTestEngine",
-    "unit.engine.tap.command": "npm run fast-test --color=always",
-    "unit.engine.tap.cover": "npm run cover --color=always",
+    "unit.engine.tap.command": "cd server && npm run fast-test --color=always",
+    "unit.engine.tap.cover": "cd server && npm run cover --color=always",
 
     "load": [".arcanist/jenkinsphoo", ".arcanist/tap", ".arcanist/jshintlinter"],
     "events.listeners": ["JenkinsDiffEventListener"],

@@ -10,14 +10,14 @@
  */
 final class TAPTestEngine extends ArcanistBaseUnitTestEngine {
 
-  private $timeout = 5;
+  private $timeout = 30;
 
   public function run() {
     $results = array();
     $build_start = microtime(true);
     $config_manager = $this->getConfigurationManager();
 
-    if ($this->getEnableCoverage() !== true) {
+    if ($this->getEnableCoverage() !== false) {
         $command = $config_manager
             ->getConfigFromAnySource('unit.engine.tap.cover');
     } else {
@@ -34,8 +34,8 @@ final class TAPTestEngine extends ArcanistBaseUnitTestEngine {
     try {
         list($stdout, $stderr) = $future->resolvex();
         $result->setResult(ArcanistUnitTestResult::RESULT_PASS);
-        if ($this->getEnableCoverage() !== true) {
-            $coverage = $this->readCoverage('coverage/cobertura-coverage.xml');
+        if ($this->getEnableCoverage() !== false) {
+            $coverage = $this->readCoverage('server/coverage/cobertura-coverage.xml');
             $result->setCoverage($coverage);
         }
     } catch(CommandException $exc) {
