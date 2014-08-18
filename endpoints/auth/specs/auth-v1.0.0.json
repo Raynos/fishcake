@@ -1,6 +1,6 @@
 {
     "description": "/auth version 1.0.0",
-    "id": "http://demo.uber.com/spec/auth-v1.0.0",
+    "id": "http://demo.uber.com/schema/auth/auth-v1.0.0",
     "request": {
         "type": "object",
         "required": ["id", "password", "app"],

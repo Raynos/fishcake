@@ -1,10 +1,9 @@
 {
-    "id": "http://demo.uber.com/spec/health",
     "read": {
         "index": {
             "handlerId": "health",
             "schema": {
-                "1.0.0": "http://demo.uber.com/spec/health-v1.0.0"
+                "1.0.0": "http://demo.uber.com/schema/health/health-v1.0.0"
             }
         }
     }

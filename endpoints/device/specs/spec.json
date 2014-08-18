@@ -1,10 +1,9 @@
 {
-    "id": "http://demo.uber.com/spec/device",
     "read": {
         "index": {
             "handlerId": "queryAll",
             "schema": {
-                "1.0.0": "http://demo.uber.com/spec/device-query-all-v1.0.0"
+                "1.0.0": "http://demo.uber.com/schema/device/device-query-all-v1.0.0"
             }
         }
     },
@@ -12,7 +11,7 @@
         "index": {
             "handler": "create",
             "schema": {
-                "1.0.0": "http://demo.uber.com/spec/device-create-v1.0.0"
+                "1.0.0": "http://demo.uber.com/schema/device/device-create-v1.0.0"
             }
         }
     },
@@ -22,7 +21,7 @@
             "index": {
                 "handler": "getOne",
                 "schema": {
-                    "1.0.0": "http://demo.uber.com/spec/device-get-one-v1.0.0"
+                    "1.0.0": "http://demo.uber.com/schema/device/device-get-one-v1.0.0"
                 }
             }
         },
@@ -30,7 +29,7 @@
             "index": {
                 "handler": "update",
                 "schema": {
-                    "1.0.0": "http://demo.uber.com/spec/device-update-v1.0.0"
+                    "1.0.0": "http://demo.uber.com/schema/device/device-update-v1.0.0"
                 }
             }
         },
@@ -38,7 +37,7 @@
             "index": {
                 "handler": "destroy",
                 "schema": {
-                    "1.0.0": "http://demo.uber.com/spec/device-remove-v1.0.0"
+                    "1.0.0": "http://demo.uber.com/schema/device/device-remove-v1.0.0"
                 }
             }
         }

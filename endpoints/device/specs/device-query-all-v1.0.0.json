@@ -1,6 +1,6 @@
 {
     "description": "/devices version 1.0.0",
-    "id": "http://demo.uber.com/spec/device-query-all-v1.0.0",
+    "id": "http://demo.uber.com/schema/device/device-query-all-v1.0.0",
     "request": {
         "type": "object",
         "properties": {

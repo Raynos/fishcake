@@ -1,14 +1,14 @@
 {
     "/auth": {
-        "schema": "http://demo.uber.com/spec/auth",
+        "schema": "http://demo.uber.com/schema/auth",
         "handlerId": "auth"
     },
     "/device": {
-        "schema": "http://demo.uber.com/spec/device",
+        "schema": "http://demo.uber.com/schema/device",
         "handlerId": "device"
     },
     "/health": {
-        "schema": "http://demo.uber.com/spec/health",
+        "schema": "http://demo.uber.com/schema/health",
         "handlerId": "health"
     }
 }
