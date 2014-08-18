@@ -15,12 +15,26 @@ The scope of this project is to show how you scaffold an API
  - Unit tests
  - Integration tests
 
+## The layers
+
+### Business layer
+
+There is a "business" layer that would normally be called
+    the "model" layer in loose MVC terminology.
+
+This is why you put the business / application logic of your
+    application, any logic that is not generic to anything else
+    but specific to your application.
+
+### Endpoints layer
+
+There is an "endpoints" layer that would normally be called
+    the "controller" layer in loose MVC terminology.
 
 ## Folder structure
 
  - `README.md` -- top level documentation of your service
  - `udeploy/` -- put your udeploy config & scripts here
-
 
  - `server/` -- contains base server. Contains stateful clients
     - `server.js` -- the entry point to your process. Keep this
@@ -75,3 +89,25 @@ The scope of this project is to show how you scaffold an API
         server, business & endpoint
  - lightweight static server
 
+## Hackedy hack
+
+Hello, you want to build a thing.
+
+Please run `make install` to install all the things,
+    remember to open a ssh to `adhoc01-peak` because much
+    gitolite sad.
+
+Please secondly run `make test` and stare at the glorious greens
+
+If test works then hackedy hack time.
+
+Next run `make swagger` to build the documentation server then
+    `open localhost:8000` to see the documentation
+
+If you run `make start` it will run the server on port 14598
+    which means you can go to the swagger-ui and click the 0.2.0
+    version of your local service.
+
+Then try expanding health and try it out.
+
+Yay your thing works, now we build MOAR endpoints

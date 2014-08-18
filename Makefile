@@ -28,4 +28,10 @@ swagger:
 	cd server && npm run swagger-spec --production
 	cd server/public && ecstatic --cache=0
 
-.PHONY: test install fast-test
+start:
+	node server/server.js --port=14598
+
+swagger-update:
+	cd server && npm run swagger-update
+
+.PHONY: test install fast-test start swagger-update swagger
