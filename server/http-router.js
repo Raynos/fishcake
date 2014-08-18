@@ -14,10 +14,11 @@ function createRouter() {
     var router = Router(require('./endpoints.json'), {
         auth: require('../endpoints/auth/'),
         device: require('../endpoints/device/'),
-        health: require('../endpoints/health/')
+        health: require('../endpoints/health/'),
+        logistics: require('../endpoints/logistics/')
     });
 
-    router.prefix('/static-lulz', require('./http/static-lulz.js'));
+    router.prefix('/custom-static-handler', require('./http/custom-handler.js'));
 
     return cors(router);
 }
