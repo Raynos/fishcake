@@ -9,6 +9,16 @@
     "playdoh-logger": {
         "console": true
     },
+    "swagger": {
+        "specOutputDir": "public/specs"
+    },
+    "spec": {
+        "protocolSpecFile": "endpoints.json",
+        "endpointSpecFile": "spec.json",
+        "endpointDir": "endpoints",
+        "versionMapFile": "protocol_version.json",
+        "initialProtocolVersion": "0.1.0"
+    },
 
     "level": {
         "dbPath": "/tmp/playdoh-scaffold-test"

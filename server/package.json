@@ -17,6 +17,7 @@
     "playdoh-perf": "git+ssh://gitolite@code.uber.internal:rt/playdoh-perf#v1.3.0",
     "process": "^0.7.0",
     "rt-on-client": "git+ssh://gitolite@code.uber.internal:rt/on-client#v1.3.0",
+    "rtapi-swagger-ui": "git+ssh://gitolite@code.uber.internal:rt/rtapi-swagger-ui.git#v1.0.4",
     "run-with": "git+ssh://gitolite@code.uber.internal:rt/run-with.git#v1.0.0",
     "sirvice": "git+ssh://gitolite@code.uber.internal:github/uber/sirvice#dev",
     "xtend": "^4.0.0",
@@ -42,6 +43,8 @@
   "scripts": {
     "test": "npm run jshint -s && npm run cover",
     "watch": "NODE_HEAPDUMP_OPTIONS=nosignal nodemon --ignore browser/ --exec 'node' server.js",
+    "swagger-spec": "node bin/swagger-spec.js",
+    "swagger-update": "node bin/update-protocol-version.js",
     "fast-test": "cached-tape ../endpoints/*/test/fast.js ../business/test/fast.js test/fast.js | tap-spec",
     "jshint": "jshint --verbose .",
     "jshint-pre-commit": "jshint --verbose $(git diff --cached --name-only --diff-filter=ACMRTUXB | grep '\\.js$')",
