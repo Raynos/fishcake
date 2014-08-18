@@ -17,6 +17,7 @@ function main(seedConfig) {
     });
 
     // seedConfig is test only stuff.
+    /* istanbul ignore else  */
     if (seedConfig) {
         Object.keys(seedConfig).forEach(function setConfig(k) {
             config.set(k, seedConfig[k]);
