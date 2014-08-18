@@ -57,9 +57,9 @@
     "changelog-patch": "playdoh changelog --patch",
     "changelog-minor": "playdoh changelog --minor",
     "changelog-major": "playdoh changelog --major",
-    "jenkins-install": "npm --registry=http://archive.uber.com/npm install",
+    "jenkins-install": "bash .jenkins/install.sh",
     "jenkins-jshint": "jshint --verbose --reporter jslint $(git ls-files | grep '\\.js$' | sed -e \"s~^~${WORKSPACE:-.}/~\") > jshint.xml",
-    "jenkins-test": "npm run jshint -s && istanbul cover --report cobertura --print none test/index.js | tee test/test.js.tap"
+    "jenkins-test": "npm run jshint -s && istanbul cover --root .. --report cobertura --print none node_modules/.bin/cached-tape -- ../endpoints/*/test/index.js ../business/test/index.js test/index.js | tee test/test.js.tap && istanbul check-coverage --branches=100"
   },
   "engines": {
     "node": "0.10.x",
