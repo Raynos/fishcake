@@ -1,0 +1,26 @@
+{
+  "name": "auth",
+  "version": "1.0.0",
+  "description": "This is a simple example of an endpoint",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run jshint && npm run cover",
+    "jshint": "jshint --verbose .",
+    "cover": "istanbul cover --print detail test/index.js && istanbul check-coverage --branches=100",
+    "view-cover": "istanbul report html && opn ./coverage/index.html",
+    "fast-test": "node test/fast.js | tap-spec"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sirvice": "git+ssh://gitolite@code.uber.internal:github/uber/sirvice#dev"
+  },
+  "devDependencies": {
+    "cached-tape": "^2.0.0",
+    "hammock": "^0.1.9",
+    "istanbul": "^0.3.0",
+    "jshint": "^2.5.3",
+    "opn": "^1.0.0",
+    "tap-spec": "^0.2.0"
+  }
+}

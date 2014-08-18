@@ -13,5 +13,10 @@
         "schema": "http://demo.uber.com/schema/health",
         "handlerId": "health",
         "specType": "rest"
+    },
+    "/logistics": {
+        "schema": "http://demo.uber.com/schema/logistics",
+        "handlerId": "logistics",
+        "specType": "rest"
     }
 }

@@ -18,6 +18,7 @@ endif
 	cd endpoints/auth/ && npm install
 	cd endpoints/device/ && npm install
 	cd endpoints/health/ && npm install
+	cd endpoints/logistics && npm install
 
 swagger:
 	cd server && rm -rf public
