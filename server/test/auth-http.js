@@ -1,6 +1,7 @@
 var test = require('cached-tape');
 var http = require('http');
 var request = require('request');
+var cuid = require('cuid');
 
 var createService = require('../server.js');
 
@@ -17,6 +18,9 @@ test('start server', function t(assert) {
         onClient: {
             host: 'localhost',
             port: ON_PORT
+        },
+        level: {
+            dbPath: '/tmp/' + cuid()
         }
     });
     service.server.listen(PORT, assert.end);

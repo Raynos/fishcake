@@ -1,5 +1,6 @@
 var test = require('cached-tape');
 var request = require('request');
+var cuid = require('cuid');
 
 var createService = require('../server.js');
 
@@ -7,7 +8,11 @@ var PORT = Math.round((Math.random() * 10000) + 20000);
 var service;
 
 test('start server', function t(assert) {
-    service = createService();
+    service = createService({
+        level: {
+            dbPath: '/tmp/' + cuid()
+        }
+    });
     service.server.listen(PORT, assert.end);
 });
 
