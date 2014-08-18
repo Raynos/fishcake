@@ -22,39 +22,50 @@ The scope of this project is to show how you scaffold an API
 There is a "business" layer that would normally be called
     the "model" layer in loose MVC terminology.
 
-This is why you put the business / application logic of your
-    application, any logic that is not generic to anything else
-    but specific to your application.
+This is where you put the business / application logic of your
+    application, any logic that is not generic but specific
+    to your application.
+
+This layer is scaffolded unstructured, but you should apply
+    your own structure that is approprite to your business logic,
+    or best practice in your problem domain.
 
 ### Endpoints layer
 
 There is an "endpoints" layer that would normally be called
     the "controller" layer in loose MVC terminology.
 
-This is the place where you define a new endpoint and a new
-    resource.
+This is the place where you define endpoints and resources.
 
 Here you put the definition of your endpoint using a schema
-    and a concrete implementation. You can then get validation
+    and a concrete implementation. You then get validation
     for free.
 
-An endpoint will contain cod that calls out into "services"
-    defined in the business layer or calls out to "clients"
-    defined in the server layer
+An endpoint will contain code that calls out into "services"
+    defined in the business layer to implement functionality,
+    or calls out to "clients" defined in the server layer to
+    log events, track metrics or implement infrastructure 
+    concerns.
+
+This layer is expected to be the minimum code needed to connect
+    the public interface to the business logic and server
+    infrastructure.
+
+The schema defined in endpoints is also used in client generation.
 
 ### Server layer
 
 There is a "server" layer that contains the raw server and all
-    the concrete stateful clients / connections / sockets needed
-    for your application.
+    the configuration for the concrete clients / connections / sockets needed for your application. Singleton client will also be 
+    created here.
 
 The server layer is a very simple static layer. This is the
     place where you put your configuration, and wire up your
-    stateful clients and business services and pass them into
+    singleton clients and business services, and pass them into
     endpoints.
 
 The server layer should contain no logic except for bootstrapping
-    your application.
+    and configuring your application.
 
 ## Folder structure
 
@@ -117,14 +128,15 @@ The server layer should contain no logic except for bootstrapping
 
 ## Philosophies
 
- - Do not `require('../')`
+ - Do not `require('../')` between layers
  - Do not have stateful requires.
- - Do develop endpoint folders as standalone units.
+ - Do keep inter-related specs as DRY as possible.
+ - Do make endpoints as standalone units where possible.
  - Do put everything in `node_modules`. Creating new modules
     is cheap, make lot's of them.
  - zero shared code (except through duplicate `node_modules`)
-    between server, business & endpoint
- - lightweight static server
+    between server, business & endpoint layers
+ - lightweight server layer
  - 100% test coverage, it's easy, really.
 
 ## Hackedy hack
