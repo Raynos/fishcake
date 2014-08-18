@@ -7,7 +7,6 @@ var cors = require('corsify')({
     'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT, PATCH, OPTIONS'
 });
 
-
 module.exports = createRouter;
 
 function createRouter() {
