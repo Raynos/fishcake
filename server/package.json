@@ -12,6 +12,7 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
+    "corsify": "^1.0.2",
     "level": "^0.18.0",
     "playdoh-clients": "git+ssh://gitolite@code.uber.internal:rt/playdoh-clients#v1.1.0",
     "playdoh-perf": "git+ssh://gitolite@code.uber.internal:rt/playdoh-perf#v1.3.0",
@@ -49,7 +50,8 @@
     "jshint": "jshint --verbose .",
     "jshint-pre-commit": "jshint --verbose $(git diff --cached --name-only --diff-filter=ACMRTUXB | grep '\\.js$')",
     "cover": "istanbul cover --root .. --print detail node_modules/.bin/cached-tape -- ../endpoints/*/test/index.js ../business/test/index.js test/index.js && istanbul check-coverage --branches=100",
-    "fast-cover": "istanbul cover --root .. node_modules/.bin/tape -- ../endpoints/*/test/fast.js",
+    "cover-integration": "istanbul cover --root .. --print detail test/index.js",
+    "fast-cover": "istanbul cover --root .. node_modules/.bin/cached-tape -- ../endpoints/*/test/fast.js ../business/test/fast.js test/fast.js",
     "view-cover": "istanbul report html && opn ./coverage/index.html",
     "shrinkwrap": "playdoh shrinkwrap",
     "changelog-patch": "playdoh changelog --patch",

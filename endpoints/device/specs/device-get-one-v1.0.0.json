@@ -1,3 +1,12 @@
 {
-    "id": "http://demo.uber.com/schema/device/device-get-one-v1.0.0"
+    "id": "http://demo.uber.com/schema/device/device-get-one-v1.0.0",
+    "request": {
+        "type": "object",
+        "properties": {
+            "id": { "type": "number" }
+        }
+    },
+    "response": {
+        "$ref": "http://demo.uber.com/schema/device/device-v1.0.0"
+    }
 }

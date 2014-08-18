@@ -1,3 +1,15 @@
 {
-    "id": "http://demo.uber.com/schema/device/device-update-v1.0.0"
+    "id": "http://demo.uber.com/schema/device/device-update-v1.0.0",
+    "request": {
+        "type": "object",
+        "properties": {
+            "id": { "type": "number" }
+        }
+    },
+    "response": {
+        "type": "object",
+        "properties": {
+            "status": { "type": "string" }
+        }
+    }
 }

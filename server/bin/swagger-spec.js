@@ -25,6 +25,7 @@ var specManager = new SpecManager({
 
 specManager.loadSpecs();
 console.info(JSON.stringify(specManager.specMap, null, 4));
+// console.info(JSON.stringify(specManager.schemas, null, 4));
 
 var emitter = new SwaggerSpecEmitter(specManager, options);
 console.info('--------------- Start Emitting RTAPI ' +

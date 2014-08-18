@@ -19,4 +19,12 @@ endif
 	cd endpoints/device/ && npm install
 	cd endpoints/health/ && npm install
 
+swagger:
+	cd server && rm -rf public
+	cd server/node_modules/rtapi-swagger-ui && npm run build
+	cd server && cp -R node_modules/rtapi-swagger-ui/dist public
+	cd server && mkdir public/specs
+	cd server && npm run swagger-spec --production
+	cd server/public && ecstatic --cache=0
+
 .PHONY: test install fast-test

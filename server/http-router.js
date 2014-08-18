@@ -1,5 +1,13 @@
 var Router = require('sirvice/router');
 
+// Seriously, fix this.
+var cors = require('corsify')({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization',
+    'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT, PATCH, OPTIONS'
+});
+
+
 module.exports = createRouter;
 
 function createRouter() {
@@ -11,5 +19,5 @@ function createRouter() {
 
     router.prefix('/static-lulz', require('./http/static-lulz.js'));
 
-    return router;
+    return cors(router);
 }

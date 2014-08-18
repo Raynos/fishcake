@@ -62,4 +62,4 @@ coverage
 
 # All translation files #
 #########################
-static/translations-s3/
+server/public
