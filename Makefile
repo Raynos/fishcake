@@ -15,10 +15,10 @@ endif
 
 	cd server/ && npm install
 	cd business/ && npm install
-	cd endpoints/auth/ && npm install
-	cd endpoints/device/ && npm install
-	cd endpoints/health/ && npm install
-	cd endpoints/logistics && npm install
+
+	for file in "endpoints/*"; do \
+		cd $$file && npm install && cd ../..; \
+	done
 
 swagger:
 	cd server && rm -rf public

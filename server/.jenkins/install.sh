@@ -7,11 +7,8 @@ CWD_PATH="`pwd`"
 
 for file in ${CWD_PATH}/endpoints/*
 do
-    if [ -d $file ]
-    then
-        echo "cd $file"
-        cd $file && npm --registry=http://archive.uber.com/npm install
-    fi
+    echo "cd $file"
+    cd $file && npm --registry=http://archive.uber.com/npm install
 done
 
 cd "${CWD_PATH}"
