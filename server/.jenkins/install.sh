@@ -2,6 +2,7 @@ npm --registry=http://archive.uber.com/npm install
 
 cd ..
 cd business/ && npm --registry=http://archive.uber.com/npm install
+cd ..
 
 CWD_PATH="`pwd`"
 
