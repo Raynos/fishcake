@@ -25,7 +25,7 @@ swagger:
 	cd server/node_modules/rtapi-swagger-ui && npm run build
 	cd server && cp -R node_modules/rtapi-swagger-ui/dist public
 	cd server && mkdir public/specs
-	cd server && npm run swagger-spec --production
+	cd server && npm run swagger-spec
 	cd server/public && ecstatic --cache=0
 
 start:
