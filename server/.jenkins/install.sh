@@ -2,10 +2,16 @@ npm --registry=http://archive.uber.com/npm install
 
 cd ..
 cd business/ && npm --registry=http://archive.uber.com/npm install
-cd ..
-cd endpoints/auth/ && npm --registry=http://archive.uber.com/npm install
-cd ../..
-cd endpoints/device/ && npm --registry=http://archive.uber.com/npm install
-cd ../..
-cd endpoints/health/ && npm --registry=http://archive.uber.com/npm install
-cd ../..
+
+CWD_PATH="`pwd`"
+
+for file in ${CWD_PATH}/endpoints/*
+do
+    if [ -d $file ]
+    then
+        echo "cd $file"
+        cd $file && npm --registry=http://archive.uber.com/npm install
+    fi
+done
+
+cd "${CWD_PATH}"
