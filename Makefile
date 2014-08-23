@@ -16,7 +16,7 @@ endif
 	cd server/ && npm install
 	cd business/ && npm install
 
-	for file in "endpoints/*"; do \
+	for file in endpoints/*; do \
 		cd $$file && npm install && cd ../..; \
 	done
 
