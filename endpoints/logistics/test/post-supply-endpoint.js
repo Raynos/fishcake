@@ -12,9 +12,16 @@ test('endpoint is a function', function t(assert) {
 
 test('endpoint writes to response', function t(assert) {
     var called = false;
+    var req = MockRequest({
+        url: '/supply',
+        headers: {
+            'content-type': 'application/json'
+        },
+        method: 'POST'
+    });
 
     endpoint(
-        MockRequest({ url: '/supply', method: 'POST' }),
+        req,
         MockResponse(function onResponse(err, resp) {
             assert.ifError(err);
 
@@ -28,4 +35,6 @@ test('endpoint writes to response', function t(assert) {
             called = true;
             assert.ifError(err);
         });
+
+    req.end(JSON.stringify({}));
 });
