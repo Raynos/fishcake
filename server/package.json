@@ -47,7 +47,7 @@
     "swagger-spec": "node bin/swagger-spec.js",
     "swagger-update": "node bin/update-protocol-version.js",
     "fast-test": "cached-tape ../endpoints/*/test/fast.js ../business/test/fast.js test/fast.js | tap-spec",
-    "jshint": "jshint --verbose .",
+    "jshint": "cd .. && jshint --verbose server endpoints/* business",
     "jshint-pre-commit": "jshint --verbose $(git diff --cached --name-only --diff-filter=ACMRTUXB | grep '\\.js$')",
     "cover": "istanbul cover --root .. --report cobertura --print detail node_modules/.bin/cached-tape -- ../endpoints/*/test/index.js ../business/test/index.js test/index.js && istanbul check-coverage --branches=100",
     "cover-integration": "istanbul cover --root .. --print detail test/index.js",
