@@ -26,7 +26,7 @@ test('endpoint writes to response', function t(assert) {
             assert.ifError(err);
 
             assert.equal(called, true);
-            assert.equal(resp.body, '{}');
+            assert.equal(resp.body, '{"id":"42"}');
 
             assert.end();
         }),
@@ -36,5 +36,7 @@ test('endpoint writes to response', function t(assert) {
             assert.ifError(err);
         });
 
-    req.end(JSON.stringify({}));
+    req.end(JSON.stringify({
+        id: '42'
+    }));
 });

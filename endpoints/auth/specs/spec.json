@@ -1,7 +1,7 @@
 {
     "id": "http://demo.uber.com/schema/auth",
     "rpc": {
-        "index": {
+        "login": {
             "handlerId": "auth",
             "schema": {
                 "1.0.0": "http://demo.uber.com/schema/auth/auth-v1.0.0"

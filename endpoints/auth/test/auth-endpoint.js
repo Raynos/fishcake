@@ -28,7 +28,7 @@ test('auth returns token', function t(assert) {
     var called = false;
 
     var req = MockRequest({
-        url: '/',
+        url: '/login',
         method: 'POST',
         headers: { 'content-type': 'application/json' }
     });
@@ -60,7 +60,7 @@ test('auth returns token', function t(assert) {
 
 test('auth fails with bad password', function t(assert) {
     var req = MockRequest({
-        url: '/',
+        url: '/login',
         method: 'POST',
         headers: { 'content-type': 'application/json' }
     });
@@ -86,7 +86,7 @@ test('auth fails with bad password', function t(assert) {
 
 test('auth fails with unknown id', function t(assert) {
     var req = MockRequest({
-        url: '/',
+        url: '/login',
         method: 'POST',
         headers: { 'content-type': 'application/json' }
     });
@@ -113,7 +113,7 @@ test('auth authenticate driver', function t(assert) {
     var called = false;
 
     var req = MockRequest({
-        url: '/',
+        url: '/login',
         method: 'POST',
         headers: { 'content-type': 'application/json' }
     });

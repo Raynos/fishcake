@@ -1,6 +1,18 @@
 {
     "id": "http://demo.uber.com/schema/logistics/post-supply-v1.0.0",
     "description": "POST /logistics/supply",
-    "request": {},
-    "response": {}
+    "request": {
+        "type": "object",
+        "properties": {
+            "id": { "type": "string" }
+        },
+        "required": ["id"]
+    },
+    "response": {
+        "type": "object",
+        "properties": {
+            "id": { "type": "string" }
+        },
+        "required": ["id"]
+    }
 }

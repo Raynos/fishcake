@@ -1,45 +1,34 @@
 {
     "id": "http://demo.uber.com/schema/device",
     "read": {
-        "index": {
-            "handlerId": "queryAll",
-            "schema": {
-                "1.0.0": "http://demo.uber.com/schema/device/device-query-all-v1.0.0"
-            }
+        "handlerId": "queryAll",
+        "schema": {
+            "1.0.0": "http://demo.uber.com/schema/device/device-query-all-v1.0.0"
         }
     },
     "create": {
-        "index": {
-            "handler": "create",
-            "schema": {
-                "1.0.0": "http://demo.uber.com/schema/device/device-create-v1.0.0"
-            }
+        "handler": "create",
+        "schema": {
+            "1.0.0": "http://demo.uber.com/schema/device/device-create-v1.0.0"
         }
     },
-    "item": {
-        "params": ["id"],
+    "{id}": {
         "read": {
-            "index": {
-                "handler": "getOne",
-                "schema": {
-                    "1.0.0": "http://demo.uber.com/schema/device/device-get-one-v1.0.0"
-                }
+            "handler": "getOne",
+            "schema": {
+                "1.0.0": "http://demo.uber.com/schema/device/device-get-one-v1.0.0"
             }
         },
         "update": {
-            "index": {
-                "handler": "update",
-                "schema": {
-                    "1.0.0": "http://demo.uber.com/schema/device/device-update-v1.0.0"
-                }
+            "handler": "update",
+            "schema": {
+                "1.0.0": "http://demo.uber.com/schema/device/device-update-v1.0.0"
             }
         },
         "destroy": {
-            "index": {
-                "handler": "destroy",
-                "schema": {
-                    "1.0.0": "http://demo.uber.com/schema/device/device-remove-v1.0.0"
-                }
+            "handler": "destroy",
+            "schema": {
+                "1.0.0": "http://demo.uber.com/schema/device/device-remove-v1.0.0"
             }
         }
     }

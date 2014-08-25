@@ -27,7 +27,7 @@ test('start server', function t(assert) {
 });
 
 test('make auth request', function t(assert) {
-    var url = 'http://localhost:' + PORT + '/auth';
+    var url = 'http://localhost:' + PORT + '/auth/login';
     request({
         url: url,
         method: 'POST',
@@ -47,7 +47,7 @@ test('make auth request', function t(assert) {
 });
 
 test('auth fails with bad password', function t(assert) {
-    var url = 'http://localhost:' + PORT + '/auth';
+    var url = 'http://localhost:' + PORT + '/auth/login';
 
     request({
         url: url,
@@ -69,7 +69,7 @@ test('auth fails with bad password', function t(assert) {
 });
 
 test('auth fails with unknown id', function t(assert) {
-    var url = 'http://localhost:' + PORT + '/auth';
+    var url = 'http://localhost:' + PORT + '/auth/login';
 
     request({
         url: url,

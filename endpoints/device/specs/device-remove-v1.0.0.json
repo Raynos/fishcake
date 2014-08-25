@@ -1,10 +1,11 @@
 {
     "id": "http://demo.uber.com/schema/device/device-remove-v1.0.0",
-    "request": {
+    "params": {
         "type": "object",
         "properties": {
             "id": { "type": "number" }
-        }
+        },
+        "required": ["id"]
     },
     "response": {
         "type": "object",
