@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "global": "^4.2.1",
+    "mercury": "^6.0.1"
+  }
+}

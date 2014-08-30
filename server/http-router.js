@@ -22,6 +22,9 @@ function createRouter() {
     router.addRoute('/', function writePage(req, res) {
         sendHtml(req, res, indexPage);
     });
+    router.addRoute('/favicon.ico', function nope(req, res) {
+        res.end('');
+    });
 
     router.addRoute('/browser/:id', ServeBrowserify({
         root: path.join(__dirname, '..', 'browser'),

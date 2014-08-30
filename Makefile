@@ -14,7 +14,7 @@ ifneq ($(NODE_VERSION), $(shell echo "v0.10.26"))
 endif
 
 	cd server/ && npm install
-    cd browser/ && npm install
+	cd browser/ && npm install
 
 server:
 	node server/server.js --port=9000
