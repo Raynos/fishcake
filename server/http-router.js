@@ -19,9 +19,8 @@ module.exports = createRouter;
 function createRouter() {
     var router = Router();
 
-    router.addRoute('/', function writePage(req, res) {
-        sendHtml(req, res, indexPage);
-    });
+    router.addRoute('/', writePage);
+    router.addRoute('/frames*', writePage);
     router.addRoute('/favicon.ico', function nope(req, res) {
         res.end('');
     });
@@ -32,4 +31,8 @@ function createRouter() {
     }));
 
     return cors(router);
+
+    function writePage(req, res) {
+        sendHtml(req, res, indexPage);
+    }
 }
