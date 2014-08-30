@@ -51,7 +51,7 @@
     "cover": "istanbul cover --root .. --report cobertura --print detail node_modules/.bin/cached-tape -- test/index.js && istanbul check-coverage --branches=100",
     "cover-integration": "istanbul cover --root .. --print detail test/index.js",
     "fast-cover": "istanbul cover --root .. node_modules/.bin/cached-tape -- test/fast.js",
-    "view-cover": "istanbul report html && opn ./coverage/index.html",
+    "view-cover": "istanbul report html && opn ./coverage/index.html"
   },
   "engines": {
     "node": "0.10.x",
