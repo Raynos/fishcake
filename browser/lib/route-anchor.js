@@ -18,7 +18,6 @@ function anchor(props, text) {
     return h('a', props, text);
 
     function pushState() {
-        console.log('pushState');
         routeAtom.set(href);
     }
 }

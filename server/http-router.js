@@ -27,7 +27,8 @@ function createRouter() {
 
     router.addRoute('/browser/:id', ServeBrowserify({
         root: path.join(__dirname, '..', 'browser'),
-        base: '/browser'
+        base: '/browser',
+        debug: true
     }));
 
     return cors(router);

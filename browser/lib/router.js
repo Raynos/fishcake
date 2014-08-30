@@ -38,11 +38,9 @@ function pushHistoryState(uri) {
 
 function popstate() {
     return source(function broadcaster(broadcast) {
-        console.log('popState');
         window.addEventListener('popstate', onPopState);
 
         function onPopState() {
-            console.log('broadcast');
             broadcast(String(document.location.pathname));
         }
     });
