@@ -3,11 +3,13 @@ var source = require('geval/source');
 var window = require('global/window');
 var document = require('global/document');
 
+var atom = Router.atom =
+    mercury.value(String(document.location.pathname));
+
 module.exports = Router;
 
 function Router() {
     var inPopState = false;
-    var atom = mercury.value(String(document.location.pathname));
     var popstates = popstate();
 
     popstates(onPopState);
@@ -36,9 +38,11 @@ function pushHistoryState(uri) {
 
 function popstate() {
     return source(function broadcaster(broadcast) {
+        console.log('popState');
         window.addEventListener('popstate', onPopState);
 
         function onPopState() {
+            console.log('broadcast');
             broadcast(String(document.location.pathname));
         }
     });

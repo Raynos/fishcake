@@ -21,6 +21,7 @@ function TopLevel() {
 }
 
 function render(state) {
+    console.log('rendering');
     return h('div', [
         routeView({
             '/': home.bind(null, state),

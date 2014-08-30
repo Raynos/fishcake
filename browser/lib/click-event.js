@@ -17,5 +17,6 @@ function clickEvent(handler, opts) {
         }
 
         handler();
+        ev.preventDefault();
     };
 }

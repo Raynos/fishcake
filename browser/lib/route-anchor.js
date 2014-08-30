@@ -1,7 +1,7 @@
 var h = require('mercury').h;
-var window = require('global/window');
-var document = require('global/document');
 var clickEvent = require('./click-event.js');
+
+var routeAtom = require('./router.js').atom;
 
 module.exports = anchor;
 
@@ -18,7 +18,7 @@ function anchor(props, text) {
     return h('a', props, text);
 
     function pushState() {
-        window.history.pushState(
-            undefined, document.title, href);
+        console.log('pushState');
+        routeAtom.set(href);
     }
 }
