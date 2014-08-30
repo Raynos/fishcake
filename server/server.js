@@ -7,7 +7,6 @@ var perf = require('playdoh-perf');
 
 var createRouter = require('./http-router.js');
 var createClients = require('./clients/');
-var createServices = require('../business/');
 
 function main(seedConfig) {
     var service = {};
@@ -25,15 +24,13 @@ function main(seedConfig) {
     }
 
     var clients = service.clients = createClients(config);
-    var services = service.services = createServices(clients);
 
-    var router = createRouter(config, clients);
+    var router = createRouter();
     service.controlPort = perf(config.get('perfSettings'));
     service.router = router;
     service.server = createServer(router, {
         config: config,
-        clients: clients,
-        services: services
+        clients: clients
     });
 
     return service;

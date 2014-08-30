@@ -1,4 +1,11 @@
-var Router = require('sirvice/router');
+var path = require('path');
+var fs = require('fs');
+var Router = require('routes-router');
+var ServeBrowserify = require('serve-browserify');
+var sendHtml = require('send-data/html');
+
+var indexPage = fs.readFileSync(
+    path.join(__dirname, 'http', 'index.html'), 'utf8');
 
 // Seriously, fix this.
 var cors = require('corsify')({
@@ -10,14 +17,16 @@ var cors = require('corsify')({
 module.exports = createRouter;
 
 function createRouter() {
-    var router = Router(require('./endpoints.json'), {
-        auth: require('../endpoints/auth/'),
-        device: require('../endpoints/device/'),
-        health: require('../endpoints/health/'),
-        logistics: require('../endpoints/logistics/')
+    var router = Router();
+
+    router.addRoute('/', function writePage(req, res) {
+        sendHtml(req, res, indexPage);
     });
 
-    router.prefix('/custom-static-handler', require('./http/custom-handler.js'));
+    router.addRoute('/browser/:id', ServeBrowserify({
+        root: path.join(__dirname, '..', 'browser'),
+        base: '/browser'
+    }));
 
     return cors(router);
 }
