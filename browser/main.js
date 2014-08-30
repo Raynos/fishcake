@@ -1,9 +1,9 @@
 var document = require('global/document');
 var mercury = require('mercury');
-var h = mercury.h;
 
-mercury.app(document.body, mercury.value(), render);
+var TopLevel = require('./top-level.js');
 
-function render() {
-    return h('div', 'Hello world');
-}
+var topLevel = TopLevel();
+var appState = topLevel.state;
+
+mercury.app(document.body, appState, TopLevel.render);
