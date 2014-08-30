@@ -16,7 +16,7 @@ endif
 	cd server/ && npm install
     cd browser/ && npm install
 
-start:
+server:
 	node server/server.js --port=9000
 
-.PHONY: test install fast-test start
+.PHONY: test install fast-test server
