@@ -1,9 +1,0 @@
-{
-    "id": "http://demo.uber.com/schema/health",
-    "read": {
-        "handlerId": "health",
-        "schema": {
-            "1.0.0": "http://demo.uber.com/schema/health/health-v1.0.0"
-        }
-    }
-}
