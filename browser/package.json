@@ -1,8 +1,9 @@
 {
   "dependencies": {
+    "cuid": "^1.2.4",
     "geval": "^2.1.1",
     "global": "^4.2.1",
-    "mercury": "^6.0.1",
+    "mercury": "^6.0.2",
     "route-map": "^0.1.0"
   }
 }

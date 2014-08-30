@@ -13,11 +13,14 @@ module.exports = TopLevel;
 
 function TopLevel() {
     var router = Router();
-    var frameList = FrameList();
+    var frames = mercury.varhash({});
+    var frameList = FrameList(frames);
+    var frameEditor = FrameEditor(frames);
 
     var state = mercury.struct({
         route: router.state,
-        frameList: frameList.state
+        frameList: frameList.state,
+        frameEditor: frameEditor.state
     });
 
     return { state: state };
@@ -30,7 +33,7 @@ function render(state) {
             '/frames': FrameList.render.bind(
                 null, state.frameList),
             '/frames/:id': FrameEditor.render.bind(
-                null, state)
+                null, state.frameEditor)
         }, {
             route: state.route
         })
