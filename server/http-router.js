@@ -24,7 +24,8 @@ function createRouter() {
     router.addRoute('/browser/:id', ServeBrowserify({
         root: path.join(__dirname, '..', 'browser'),
         base: '/browser',
-        debug: true
+        // debug: true,
+        watchify: true
     }));
     router.addRoute('/reset.css', writeCss);
 

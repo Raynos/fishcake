@@ -1,11 +1,21 @@
 {
   "dependencies": {
+    "choke": "^0.1.2",
     "cuid": "^1.2.4",
+    "error": "^4.2.0",
     "geval": "^2.1.1",
     "global": "^4.2.1",
     "mercury": "^6.0.2",
     "rcss": "^0.1.3",
     "route-map": "^0.1.0",
     "virtual-hyperscript": "^4.5.0"
+  },
+  "scripts": {
+    "disc": "browserify --full-paths main.js > bundle.js; discify bundle.js > disc.html; opn disc.html"
+  },
+  "devDependencies": {
+    "browserify": "^5.11.0",
+    "disc": "^1.2.1",
+    "opn": "^1.0.0"
   }
 }

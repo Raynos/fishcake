@@ -1,8 +1,8 @@
 var mercury = require('mercury');
 var h = require('mercury').h;
 
-var Project = require('../components/project.js');
-var AddItemForm = require('../components/add-item-form.js');
+var Project = require('./components/project.js');
+var AddItemForm = require('./components/add-item-form.js');
 var styles = require('./styles.js');
 
 FrameList.render = render;

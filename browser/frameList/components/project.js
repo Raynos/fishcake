@@ -3,7 +3,7 @@ var h = require('mercury').h;
 var cuid = require('cuid');
 
 var AddItemForm = require('./add-item-form.js');
-var Frame = require('../entities/frame.js');
+var Frame = require('./frame.js');
 
 Project.render = renderProject;
 
@@ -32,8 +32,8 @@ function Project(opts, frames) {
             $name: data.value,
             projectName: state.projectName()
         });
-        frames.put(frame.id, frame);
-        state.frames.push(frame.id);
+        frames.put(frame.state.id, frame.state);
+        state.frames.push(frame.state.id);
     });
 
     state.events.toggleCollapse(function toggleCollapse() {
@@ -56,15 +56,9 @@ function renderProject(project) {
         }, project.projectName),
         h('ul.frames', {
             hidden: project.viewState.collapsed
-        }, frames.map(renderFrame)),
+        }, frames.map(Frame.render)),
         AddItemForm.render(project.viewState.frameForm, {
             fieldName: 'Frame Name'
         })
-    ]);
-}
-
-function renderFrame(frame) {
-    return h('li', [
-        h('span', frame.$name)
     ]);
 }
