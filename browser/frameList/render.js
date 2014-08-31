@@ -1,9 +1,7 @@
-var hg = require('mercury');
 var h = require('mercury').h;
-var FocusHook = require('virtual-hyperscript/hooks/focus-hook');
 
+var AddItemForm = require('../components/add-item-form.js');
 var styles = require('./styles.js');
-var InputComponent = require('../components/input.js');
 
 module.exports = render;
 
@@ -12,17 +10,22 @@ function render(state) {
         h('h2', 'Project List'),
         h('ul.projects', mapObject(state.projects,
             renderProject.bind(null, state))),
-        addItemForm(state.projectForm, {
+        AddItemForm.render(state.projectForm, {
             fieldName: 'Project Name'
         })
     ]);
 }
 
 function renderProject(state, project) {
+    var frames = project.frames.map(function (id) {
+        return state.frames[id];
+    });
+
     return h('li', [
         h('span', project.projectName),
-        h('ul.frames', []),
-        addItemForm(state.frameForm, {
+        h('ul.frames', frames.map(
+            renderFrame.bind(null, state))),
+        AddItemForm.render(project.frameForm, {
             meta: {
                 id: project.id
             },
@@ -31,25 +34,12 @@ function renderProject(state, project) {
     ]);
 }
 
-function addItemForm(state, opts) {
-    var editItem = state.events.editItem;
-    var saveItem = state.events.saveItem;
-
-    return h('div.item-form', [
-        h('label', {
-            hidden: !state.editing,
-            'ev-event': hg.submitEvent(saveItem, opts.meta || {})
-        }, [
-            h('span', opts.fieldName),
-            InputComponent.render(state.text, {
-                'data-hook': state.editing ? FocusHook() : null
-            })
-        ]),
-        h('button.add-item', {
-            'ev-click': hg.event(editItem)
-        }, '+')
+function renderFrame(state, frame) {
+    return h('li', [
+        h('span', frame.$name)
     ]);
 }
+
 
 function mapObject(obj, fn) {
     var keys = Object.keys(obj);

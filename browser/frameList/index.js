@@ -1,51 +1,27 @@
 var mercury = require('mercury');
 
-var Project = require('../entities/project.js');
-// var Frame = require('../entities/frame.js');
-var InputComponent = require('../components/input.js');
+var Project = require('../components/project.js');
+var AddItemForm = require('../components/add-item-form.js');
 
 FrameList.render = require('./render.js');
 
 module.exports = FrameList;
 
-function ListState(frames) {
-    return mercury.struct({
+function FrameList(frames) {
+    var projectForm = AddItemForm();
+
+    var state = mercury.struct({
         frames: frames,
         projects: mercury.varhash({}),
-        projectForm: mercury.struct({
-            editing: mercury.value(false),
-            text: InputComponent('projectName').state,
-            events: {
-                addProject: mercury.input(),
-                saveProject: mercury.input()
-            }
-        })
+        projectForm: projectForm.state
     });
-}
 
-function FrameList(frames) {
-    var state = ListState(frames);
-
-    state.projectForm.events.addProject(addProject);
-    state.projectForm.events.saveProject(saveProject);
+    projectForm.newItem(function (data) {
+        var project = Project({
+            projectName: data.value
+        }, frames);
+        state.projects.put(project.state.id, project.state);
+    });
 
     return { state: state };
-
-    function addProject() {
-        state.projectForm.editing.set(true);
-    }
-
-    function saveProject(data) {
-        state.projectForm.editing.set(false);
-        InputComponent.clear(state.projectForm.text);
-
-        if (!data.projectName) {
-            return;
-        }
-
-        var project = Project({
-            projectName: data.projectName
-        });
-        state.projects.put(data.id, project);
-    }
 }
