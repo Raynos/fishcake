@@ -1,36 +1,25 @@
 #!/usr/bin/env node
 var hostname = require('os').hostname;
-var fetchConfig = require('zero-config');
 var process = require('process');
-var createServer = require('sirvice/server.js');
-var perf = require('playdoh-perf');
+var http = require('http');
 
 var createRouter = require('./http-router.js');
-var createClients = require('./clients/');
 
-function main(seedConfig) {
+function main() {
     var service = {};
-    var config = service.config = fetchConfig(__dirname, {
-        dc: process.env.NODE_ENV === 'production' ?
-            /* istanbul ignore next */ '/etc/uber/datacenter' : null
-    });
-
-    // seedConfig is test only stuff.
-    /* istanbul ignore else  */
-    if (seedConfig) {
-        Object.keys(seedConfig).forEach(function setConfig(k) {
-            config.set(k, seedConfig[k]);
-        });
-    }
-
-    var clients = service.clients = createClients(config);
 
     var router = createRouter();
-    service.controlPort = perf(config.get('perfSettings'));
     service.router = router;
-    service.server = createServer(router, {
-        config: config,
-        clients: clients
+    service.server = http.createServer(router);
+
+    // log all access
+    service.server.on('request', function onRequest(req) {
+        console.log('serving request', req.url);
+    });
+    service.server.on('listening', function onListen() {
+        var addr = service.server.address();
+
+        console.log('listening on', addr.port);
     });
 
     return service;
@@ -45,9 +34,5 @@ if (require.main === module) {
     process.title = 'nodejs-rt-myTest-on-' + hostname();
 
     var service = main();
-    service.server.listen(service.config.get('port'));
-    service.controlPort
-        .listen(service.config.get('controlPort'));
-
-    process.on('uncaughtException', service.clients.onError);
+    service.server.listen(3000);
 }
