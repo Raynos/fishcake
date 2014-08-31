@@ -20,13 +20,6 @@ function ListState(frames) {
                 saveProject: mercury.input()
             }
         })
-        // errors: mercury.struct({
-        //     frameName: mercury.value('')
-        // }),
-        // frameName: Input('frameName').state,
-        // events: {
-        //     newFrame: mercury.input()
-        // }
     });
 }
 
@@ -46,26 +39,13 @@ function FrameList(frames) {
         state.projectForm.editing.set(false);
         InputComponent.clear(state.projectForm.text);
 
+        if (!data.projectName) {
+            return;
+        }
+
         var project = Project({
             projectName: data.projectName
         });
-        state.projects.put(data.projectName, project);
+        state.projects.put(data.id, project);
     }
-
-    // function addFrame(data) {
-    //     if (!data.frameName ||
-    //         data.frameName.length <= 0
-    //     ) {
-    //         state.errors.frameName.set('must supply a name');
-    //         return;
-    //     }
-
-    //     state.errors.frameName.set('');
-    //     Input.clear(state.frameName);
-    //     var frame = Frame({
-    //         $name: data.frameName
-    //     });
-
-    //     state.frames.put(frame.id, frame);
-    // }
 }
