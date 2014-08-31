@@ -1,11 +1,5 @@
 NODE_VERSION := $(shell node -v)
 
-test:
-	cd server/ && npm test
-
-fast-test:
-	cd server/ && npm run fast-test
-
 install:
 ifneq ($(NODE_VERSION), $(shell echo "v0.10.26"))
 	@echo 'Wrong version of node $(NODE_VERSION)';

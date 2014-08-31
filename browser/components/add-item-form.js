@@ -18,7 +18,7 @@ function AddItemForm() {
             cancelItem: hg.input()
         }
     });
-    
+
     var newItem = hg.input();
 
     state.events.editItem(editItem);
