@@ -1,4 +1,4 @@
-var mercury = require('mercury');
+var hg = require('mercury');
 var h = require('mercury').h;
 var cuid = require('cuid');
 
@@ -12,15 +12,19 @@ module.exports = Project;
 function Project(opts, frames) {
     var frameForm = AddItemForm();
 
-    var state = mercury.struct({
+    var state = hg.struct({
         id: cuid(),
-        projectName: mercury.value(opts.projectName || ''),
-        frames: mercury.array([]),
+        projectName: hg.value(opts.projectName || ''),
+        frames: hg.array([]),
 
-        viewState: mercury.struct({
+        viewState: hg.struct({
             frameForm: frameForm.state,
-            allFrames: frames
-        })
+            allFrames: frames,
+            collapsed: hg.value(false)
+        }),
+        events: {
+            toggleCollapse: hg.input()
+        }
     });
 
     frameForm.newItem(function newItem(data) {
@@ -32,6 +36,11 @@ function Project(opts, frames) {
         state.frames.push(frame.id);
     });
 
+    state.events.toggleCollapse(function toggleCollapse() {
+        state.viewState.collapsed.set(
+            !state.viewState.collapsed());
+    });
+
     return { state: state };
 }
 
@@ -39,10 +48,15 @@ function renderProject(project) {
     var frames = project.frames.map(function getFrame(id) {
         return project.viewState.allFrames[id];
     });
+    var toggleCollapse = project.events.toggleCollapse;
 
     return h('li', [
-        h('span', project.projectName),
-        h('ul.frames', frames.map(renderFrame)),
+        h('span', {
+            'ev-click': hg.event(toggleCollapse)
+        }, project.projectName),
+        h('ul.frames', {
+            hidden: project.viewState.collapsed
+        }, frames.map(renderFrame)),
         AddItemForm.render(project.viewState.frameForm, {
             fieldName: 'Frame Name'
         })
