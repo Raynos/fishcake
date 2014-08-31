@@ -24,7 +24,7 @@ function TopLevel() {
 }
 
 function render(state) {
-    return h('div', [
+    return h('.' + styles.container, [
         h('.' + styles.projectPanel, [
             FrameList.render(state.frameList)
         ]),
