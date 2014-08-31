@@ -26,9 +26,6 @@ function renderProject(state, project) {
         h('ul.frames', frames.map(
             renderFrame.bind(null, state))),
         AddItemForm.render(project.frameForm, {
-            meta: {
-                id: project.id
-            },
             fieldName: 'Frame Name'
         })
     ]);
