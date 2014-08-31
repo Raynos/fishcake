@@ -1,5 +1,6 @@
 var hg = require('mercury');
 var h = require('mercury').h;
+var FocusHook = require('virtual-hyperscript/hooks/focus-hook');
 
 var styles = require('./styles.js');
 var InputComponent = require('../components/input.js');
@@ -38,7 +39,9 @@ function addProjectForm(state) {
             'ev-event': hg.submitEvent(saveProject)
         }, [
             h('span', 'Project Name'),
-            InputComponent.render(state.text)
+            InputComponent.render(state.text, {
+                'data-hook': state.editing ? FocusHook() : null
+            })
         ]),
         h('button.add-project', {
             'ev-click': hg.event(addProject)

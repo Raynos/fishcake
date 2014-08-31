@@ -1,5 +1,6 @@
 var mercury = require('mercury');
 
+var Project = require('../entities/project.js');
 // var Frame = require('../entities/frame.js');
 var InputComponent = require('../components/input.js');
 
@@ -13,7 +14,7 @@ function ListState(frames) {
         projects: mercury.varhash({}),
         projectForm: mercury.struct({
             editing: mercury.value(false),
-            text: InputComponent().state,
+            text: InputComponent('projectName').state,
             events: {
                 addProject: mercury.input(),
                 saveProject: mercury.input()
@@ -41,8 +42,14 @@ function FrameList(frames) {
         state.projectForm.editing.set(true);
     }
 
-    function saveProject() {
-        console.log('saveProject');
+    function saveProject(data) {
+        state.projectForm.editing.set(false);
+        InputComponent.clear(state.projectForm.text);
+
+        var project = Project({
+            projectName: data.projectName
+        });
+        state.projects.put(data.projectName, project);
     }
 
     // function addFrame(data) {
