@@ -4,7 +4,6 @@ var anchor = require('../lib/route-anchor.js');
 
 var Frame = require('../entities/frame.js');
 var Input = require('../components/input.js');
-var menu = require('../views/menu.js');
 
 FrameList.render = render;
 
@@ -52,7 +51,6 @@ function render(state) {
         });
 
     return h('div', [
-        menu(),
         h('h2', 'frameList'),
         h('ul', frames.map(showFrame)),
         h('div', {

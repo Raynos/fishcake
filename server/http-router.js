@@ -3,16 +3,12 @@ var fs = require('fs');
 var Router = require('routes-router');
 var ServeBrowserify = require('serve-browserify');
 var sendHtml = require('send-data/html');
+var sendCss = require('send-data/css');
 
 var indexPage = fs.readFileSync(
     path.join(__dirname, 'http', 'index.html'), 'utf8');
-
-// Seriously, fix this.
-var cors = require('corsify')({
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization',
-    'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT, PATCH, OPTIONS'
-});
+var resetCss = fs.readFileSync(
+    path.join(__dirname, 'http', 'reset.css'), 'utf8');
 
 module.exports = createRouter;
 
@@ -30,10 +26,15 @@ function createRouter() {
         base: '/browser',
         debug: true
     }));
+    router.addRoute('/reset.css', writeCss);
 
-    return cors(router);
+    return router;
 
     function writePage(req, res) {
         sendHtml(req, res, indexPage);
+    }
+
+    function writeCss(req, res) {
+        sendCss(req, res, resetCss);
     }
 }

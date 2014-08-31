@@ -1,8 +1,6 @@
 var mercury = require('mercury');
 var h = require('mercury').h;
 
-var menu = require('../views/menu.js');
-
 FrameEditor.render = render;
 
 module.exports = FrameEditor;
@@ -15,18 +13,6 @@ function FrameEditor(frames) {
     return { state: state };
 }
 
-function render(state, params) {
-    var id = params.id;
-    var frame = state.frames[id];
-
-    return h('div', [
-        menu(),
-        h('h2', 'frameEditor'),
-        h('div', [
-            h('label', [
-                'Name: ',
-                frame.$name
-            ])
-        ])
-    ]);
+function render() {
+    return h('div', 'frameEditor');
 }
