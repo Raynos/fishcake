@@ -1,6 +1,7 @@
 var hg = require('mercury');
 var h = require('mercury').h;
 var cuid = require('cuid');
+var Event = require('geval/event');
 
 var AddItemForm = require('./add-item-form.js');
 var Frame = require('./frame.js');
@@ -9,8 +10,9 @@ Project.render = renderProject;
 
 module.exports = Project;
 
-function Project(opts, frames) {
+function Project(opts) {
     var frameForm = AddItemForm();
+    var newFrame = Event();
 
     var state = hg.struct({
         id: cuid(),
@@ -19,7 +21,6 @@ function Project(opts, frames) {
 
         viewState: hg.struct({
             frameForm: frameForm.state,
-            allFrames: frames,
             collapsed: hg.value(false)
         }),
         events: {
@@ -32,7 +33,7 @@ function Project(opts, frames) {
             $name: data.value,
             projectName: state.projectName()
         });
-        frames.put(frame.state.id, frame.state);
+        newFrame.broadcast(frame.state);
         state.frames.push(frame.state.id);
     });
 
@@ -41,12 +42,17 @@ function Project(opts, frames) {
             !state.viewState.collapsed());
     });
 
-    return { state: state };
+    return {
+        state: state,
+        newFrame: newFrame.listen
+    };
 }
 
-function renderProject(project) {
+function renderProject(project, opts) {
+    var allFrames = opts.frames;
+
     var frames = project.frames.map(function getFrame(id) {
-        return project.viewState.allFrames[id];
+        return allFrames[id];
     });
     var toggleCollapse = project.events.toggleCollapse;
 

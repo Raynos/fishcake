@@ -52,7 +52,6 @@ function AddItemForm() {
     }
 }
 
-
 function render(state, opts) {
     var editItem = state.events.editItem;
     var cancelItem = state.events.cancelItem;
@@ -61,12 +60,12 @@ function render(state, opts) {
     return h('div.item-form', [
         h('label', {
             hidden: !state.editing,
-            'ev-event': hg.submitEvent(saveItem, opts.meta || {})
+            'ev-event': hg.submitEvent(saveItem, opts.meta || {}),
+            'ev-blur': hg.event(cancelItem)
         }, [
             h('span', opts.fieldName),
             InputComponent.render(state.text, {
-                'data-hook': state.editing ? FocusHook() : null,
-                'ev-blur': hg.event(cancelItem)
+                'data-hook': state.editing ? FocusHook() : null
             })
         ]),
         h('button.add-item', {

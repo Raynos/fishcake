@@ -1,5 +1,6 @@
 var mercury = require('mercury');
 var h = require('mercury').h;
+var Event = require('geval/event');
 
 var Project = require('./components/project.js');
 var AddItemForm = require('./components/add-item-form.js');
@@ -9,11 +10,11 @@ FrameList.render = render;
 
 module.exports = FrameList;
 
-function FrameList(frames) {
+function FrameList() {
     var projectForm = AddItemForm();
+    var newFrame = Event();
 
     var state = mercury.struct({
-        frames: frames,
         projects: mercury.varhash({}),
 
         viewState: mercury.struct({
@@ -24,22 +25,34 @@ function FrameList(frames) {
     projectForm.newItem(function newItem(data) {
         var project = Project({
             projectName: data.value
-        }, frames);
+        });
         state.projects.put(project.state.id, project.state);
+        project.newFrame(function onFrame(frame) {
+            newFrame.broadcast(frame);
+        });
     });
 
-    return { state: state };
+    return {
+        state: state,
+        newFrame: newFrame.listen
+    };
 }
 
-function render(state) {
+function render(state, frames) {
     return h('.' + styles.projectList, [
         h('h2', 'Project List'),
         h('ul.projects',
-            mapObject(state.projects, Project.render)),
+            mapObject(state.projects, renderProject)),
         AddItemForm.render(state.viewState.projectForm, {
             fieldName: 'Project Name'
         })
     ]);
+
+    function renderProject(proj) {
+        return Project.render(proj, {
+            frames: frames
+        });
+    }
 }
 
 function mapObject(obj, fn) {

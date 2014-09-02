@@ -5,28 +5,26 @@ FrameEditor.render = render;
 
 module.exports = FrameEditor;
 
-function FrameEditor(frames) {
-    var state = mercury.struct({
-        frames: frames
-    });
+function FrameEditor() {
+    var state = mercury.struct({});
 
     return { state: state };
 }
 
-function render(state) {
+function render(state, frames) {
     return h('div', [
-        windowTabs(state)
+        windowTabs(state, frames)
     ]);
 }
 
-function windowTabs(state) {
-    var openFrames = Object.keys(state.frames)
+function windowTabs(state, frames) {
+    var openFrames = Object.keys(frames)
         .map(toOpenFrame).filter(Boolean);
 
     return h('div.window-tabs', openFrames.map(windowTab));
 
     function toOpenFrame(key) {
-        var frame = state.frames[key];
+        var frame = frames[key];
 
         return frame.viewState.open ? frame : null;
     }
